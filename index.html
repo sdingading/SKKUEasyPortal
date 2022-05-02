@@ -12,30 +12,59 @@
   <body>
 
 <main>
+<<<<<<< HEAD
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white sidebarbg" style="width: 280px;">
     <div class ="d-flex justify-content-center" onclick="changeIframe('page/home.html')" style="cursor:pointer">
       <img src="images/SKKU_logo.png" style="mix-blend-mode: soft-light;width: 142px;height: 34px;" alt="SKKU" >
+=======
+  <div class="d-flex flex-column flex-shrink-0  text-white sidebarbg" style="width: 220px;">
+    <div class ="d-flex justify-content-center mt-4" onclick="changeIframe('page/home.html')" style="cursor:pointer">
+      <img src="images/SKKU_logo.png" style="mix-blend-mode: soft-light;width: 150px;height: auto;" alt="SKKU" >
+>>>>>>> savePart
     </div>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto text-center">
-      <li class="nav-item">
-        <a href="#" id="Search" class="nav-link" onclick="changeIframe('page/Search.html')">
-          궁금해
+    <ul class="nav nav-pills flex-column mt-5 mb-auto text-center">
+      <li>
+        <a href="#" id="Search" class="nav-link" style="height: 90px;" onclick="changeIframe('page/Search.html')">
+          <span style="line-height:70px;">궁금해</span>
         </a>
       </li>
       <li>
-        <a href="#" id="Study" class="nav-link" onclick="changeIframe('page/Study.html')">
-          공부해
+        <a href="#" id="Study" class="nav-link " style="height: 90px;" onclick="changeIframe('page/Study.html')">
+          <span style="line-height:70px;">공부해</span>
         </a>
       </li>
       <li>
-        <a href="#" id="Save"class="nav-link" onclick="changeIframe('page/Save.html')">
-          암기해
+        <a href="#" id="Save"class="nav-link" style="height: 90px" onclick="changeIframe('page/Save.html')">
+          <span style="line-height:70px;">암기해</span>
         </a>
       </li>
     </ul>
-    <hr>
     <div class="dropdown">
+      <h1 id="Save"class="text-center mb-3 fs-2 fw-bold" onclick="changeIframe('page/Save.html')">
+        즐겨찾기
+      </h1>
+      <ul class="nav nav-pills flex-column mb-4 text-center">
+        <li>
+          <a href="https://www.skku.edu/" target="_blank" class="nav-site mb-0 fs-4">
+            SKKU
+          </a>
+        </li>
+        <li>
+          <a href="https://icampus.skku.edu/" target="_blank" class="nav-site mb-0 fs-4">
+            i-campus
+          </a>
+        </li>
+        <li>
+          <a href="https://cs.skku.edu/ko/" target="_blank" class="nav-site mb-0 fs-5" onclick="changeIframe('page/Save.html')">
+            학과 홈페이지
+          </a>
+        </li>
+        <li>
+          <a href="https://dorm.skku.edu/dorm/index.jsp" target="_blank" class="nav-site mb-0 fs-5" onclick="changeIframe('page/Save.html')">
+            기숙사
+          </a>
+        </li>
+      </ul>
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="images/unknown.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong>User</strong>
