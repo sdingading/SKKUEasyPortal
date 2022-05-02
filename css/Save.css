@@ -24,7 +24,7 @@ body {
   overflow-x:hidden;
 }
 #tab ul:hover{
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 #tab ul li{
   display:inline-block; margin-right:10px;
