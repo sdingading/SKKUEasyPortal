@@ -13,31 +13,41 @@
   </head>
   
   <body>
-    <div style="width:100vw; height:100vh;">
-    <nav class="d-flex m-5 mb-0 fs-2">
-      <span class="me-auto" style="color:#6F5141; font-size:20px; font-weight: bold; margin-top:10px;margin-left:20px;">책장</span>
-      <i id="Add" class="bi bi-plus-square me-4" style="color:#AC9C8D"></i>
-    </nav>
-    <div class="book_container ms-5 mt-1">
-      <div id="tab">
-        <ul>
-        <li class="book m-1"></li>
-        <li class="book m-1"></li>
-        <li class="book m-1"></li>
-        <li class="book m-1"></li>
-        <li class="book m-1"></li>
-        <li class="book m-1"></li>
-        <li class="book m-1"></li>
-        <li class="book m-1"></li>
-        </ul>
+    <div class="pageContainer d-flex flex-column" style="width:100vw; height:95vh; background-color:#6F5141; margin:30px 30px 0px 30px; border-radius: 32px;">
+      <div id="mainbook" class="book ms-5 mt-5 mb-5" style="cursor: pointer;"></div>
+      <div id="booklet" class="booklet flex-column" style = "display:none; top:350px;left:60px">
+        <div class="corn m-1"></div>
+        <i id="Add" class="bi bi-plus fs-2 ms-auto me-4" style="color:#FFFFFF; cursor:pointer"></i>
+          <div id = "tab">
+            <ul id ="list">
+            </ul>
+          </div>
+      </div>
+
+    </div>
+    <div class="gray-container" id="gray-container">
+      <div id="setting" style="position:absolute; background-color:darkgrey; top:50%; left:50%; transform: translate(-50%, -50%); z-index:100">
+        <div class="color-picker"></div>
+        <div id="color-indicator" class ="color-indicator"></div>
+        <div id="color-picker"></div>
+        <button type="button" id="create" class="btn btn-primary ms-2 text-nowrap"><i class="bi bi-plus"></i>Add</button>
       </div>
     </div>
-    <div class="page_container ms-5">
-      <div class="corn m-1"></div>
-    </div>
-  </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="../js/save.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script>
+      let colorIndicator = document.getElementById('color-indicator');
+      let SethexColor = null;
+      const colorPicker = new iro.ColorPicker("#color-picker",{
+        width:180, color:"#fff"
+      });
+      colorPicker.on('color:change', function(color){
+        colorIndicator.style.backgroundColor = color.hexString;
+        SethexColor = color.hexString;
+      });
+    </script>
   </body>
 </html>
