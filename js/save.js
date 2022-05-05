@@ -1,5 +1,4 @@
 let buttonMainBook = document.querySelector("#mainbook");
-console.log(document.getElementById("booklet"));
 buttonMainBook.addEventListener("click",()=>{
     if(document.getElementById("booklet").style.display === "none"){
         document.getElementById("booklet").style.display = "flex";
