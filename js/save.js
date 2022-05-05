@@ -19,7 +19,6 @@ containerClick.addEventListener("click",(e)=>{
 let buttonCreate = document.querySelector("#create");
 buttonCreate.addEventListener("click",()=>{
   let newBook = document.createElement("li");
-  console.log("a");
   newBook.style.backgroundColor = SethexColor;
   newBook.classList.add("book","m-1");
   let booklet = document.querySelector("#list");
