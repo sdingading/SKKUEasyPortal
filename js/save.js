@@ -1,10 +1,11 @@
 let buttonMainBook = document.querySelector("#mainbook");
 buttonMainBook.addEventListener("click",()=>{
-    if(document.getElementById("booklet").style.display === "none"){
-        document.getElementById("booklet").style.display = "flex";
+  let booklet = document.getElementById("booklet");
+    if(booklet.style.display === "none"){
+        booklet.style.display = "flex";
     }
     else{
-        document.getElementById("booklet").style.display = "none";
+        booklet.style.display = "none";
     }
 })
 let buttonBookAdd = document.querySelector("#Add");
@@ -18,9 +19,24 @@ containerClick.addEventListener("click",(e)=>{
 let buttonCreate = document.querySelector("#create");
 buttonCreate.addEventListener("click",()=>{
   let newBook = document.createElement("li");
-  newBook.style.backgroundColor = SethexColor;
+  newBook.style.backgroundColor = bgColor;
+  newBook.style.color = ftColor;
   newBook.classList.add("book","m-1");
-  let booklet = document.querySelector("#list");
+  newBook.innerHTML =`<p>${document.querySelector(".letter").innerText}</p>`;
+  newBook.style.cursor="pointer";
+  newBook.addEventListener("click",()=>{
+    let book = document.querySelector("#mainbook");
+    let temp = book.cloneNode();
+    temp.innerHTML = book.innerHTML;
+    book.style.backgroundColor = newBook.style.backgroundColor;
+    book.style.color = newBook.style.color;
+    book.innerHTML = newBook.innerHTML;
+    newBook.style.backgroundColor = temp.style.backgroundColor;
+    newBook.style.color = temp.style.color;
+    newBook.innerHTML = temp.innerHTML;
+    document.querySelector("#booklet").style.display = "none";
+  })
+  let booklet = document.querySelector("#tab");
   booklet.insertBefore(newBook,booklet.firstChild);
   document.getElementById("gray-container").style.display = "none";
 })
