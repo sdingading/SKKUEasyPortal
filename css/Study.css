@@ -1,3 +1,13 @@
+/*
+참고한 코드 출처 표기는 어떻게,,?
+재생, 일시정지 버튼 만들기
+https://codepen.io/justseecoding/pen/gXXdzv
+https://codepen.io/justseecoding/pen/BmYezx
+
+*/
+
+
+
 body {
     display: flex;
     flex-wrap: nowrap;
@@ -8,3 +18,107 @@ body {
     max-height: 100vh;
     overflow-x: auto;
   }
+
+  .container{
+    margin: auto;
+    margin-top: 0.8%;
+  }
+
+  .col{
+    margin-top: 0.8%;
+
+  }
+
+  /* timer block */
+  .d-dayList{
+    color: #6F5141;
+    text-align: end;
+    margin-right: 2%;
+    margin-top: 2%;
+    font-weight: bold;
+  }
+
+  .timerContainer {
+    width: 1500px;
+    height: fit-content;
+    background: white;  
+    margin: auto;
+    margin-left: -10%;
+    margin-top : 0.8%;
+    padding-inline: 10%;
+    padding-inline-start: 5%;
+    padding-inline-end: 5%;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.timerSet{
+  text-align: center;
+  vertical-align: middle;
+  margin: 20px;
+  padding-top: 5px;
+  width: 100%;
+  height: 40px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.d-day{
+  color: #ebb01c;
+  margin-left: 3%;
+}
+
+.subjectName{
+  height: fit-content;
+  width: fit-content;
+  margin-inline: 40px;
+}
+
+.btnTimer{
+  background-color: white;
+  height: fit-content;
+  width: fit-content;
+  margin-left: 3%;
+  border: 0px;  
+}
+
+.playButton{
+  width:14px;
+  height:28px;
+  border-width:14px 0 14px 28px;
+  margin-top: 6px;
+  border-color:transparent transparent transparent #6F5141;
+  border-style:solid solid solid solid;
+}
+
+.pauseButton{
+  width:28px;
+  height:28px;
+  border-width:0 0 0 28px;
+  margin-top: 6px;
+  border-color:red blue pink #6F5141;
+  border-style:double;
+}
+
+.timeBox{
+  background-color: #6F5141;
+  margin-inline: 40px;
+  padding-inline: 50px;
+  height: fit-content;
+  width: fit-content;
+  color:#F9EDE1;
+  font-size: larger;
+}
+
+#timerLine{
+  background-color:#6F5141;
+  width: 93%;
+  height:13px;
+  margin-inline: 4%;
+  margin-top: 2%;
+  margin-bottom:3%;
+}
+/* to-do list block */
+
+/* calender block */
