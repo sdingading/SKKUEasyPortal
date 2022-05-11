@@ -1,5 +1,4 @@
 const buttons = document.querySelector("#buttons");
-console.log("a");
 console.log(buttons);
 const signupEmail = (email,password) =>{
     return firebase.auth().createUserWithEmailAndPassword(email,password);
@@ -10,7 +9,6 @@ const loginEmail = (email,password)=>{
 const login_area = document.getElementById('login-area');
 buttons.addEventListener('click', (e) => {
     e.preventDefault();
-    login_area.innerHTML = "";
     email = document.querySelector("#inputEmail2");
     password = document.querySelector("#inputPassword2")
     if (e.target.id === 'signin') {
