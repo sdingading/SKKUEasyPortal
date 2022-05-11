@@ -17,6 +17,9 @@
   <body>
     <div class="pageContainer d-flex flex-column" style="width:100vw; height:95vh; background-color:#6F5141; margin:30px 30px 0px 30px; border-radius: 32px;">
       <div id="mainbook" class="book m-5" style="cursor: pointer; background-color: #FFFFFF;"> </div>
+      <input type = "file" id = "fileUpload" style = "width:150px;height:100px; margin-left:auto">
+      <div id = "list">
+      </div>
       <div id="booklet" class="booklet flex-column" style = "display:none; top:350px;left:60px">
         <div class="corn m-1"></div>
         <i id="Add" class="bi bi-plus fs-2 ms-auto me-4" style="color:#FFFFFF; cursor:pointer"></i>
@@ -51,8 +54,8 @@
 
     <script>
     let Color = CodeMirrorColorPicker.Color;
-    let bgColor = null;
-    let ftColor = null;
+    let bgColor = '#E39E81';
+    let ftColor = 'white';
     let bgnode = document.querySelector(".bgcolor-picker");
     let ftnode = document.querySelector(".ftcolor-picker");
       let bgpicker = new CodeMirrorColorPicker.create({
