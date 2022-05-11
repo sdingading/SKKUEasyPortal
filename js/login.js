@@ -1,11 +1,20 @@
 const buttons = document.querySelector("#buttons");
-console.log(buttons);
+const db = firebase.firestore();
 const signupEmail = (email,password) =>{
-    return firebase.auth().createUserWithEmailAndPassword(email,password);
+    firebase.auth().createUserWithEmailAndPassword(email,password);
 }
 const loginEmail = (email,password)=>{
-    return firebase.auth().signInWithEmailAndPassword(email,password);
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    firebase.auth().signInWithEmailAndPassword(email,password);
+    firebase.auth().setStatus(" ");
 }
+firebase.auth().onAuthStateChanged((user)=>{
+  console.log(firebase.auth().currentUser);
+  if(user){
+    location.href = "Search.html";
+  }
+});
+
 const login_area = document.getElementById('login-area');
 buttons.addEventListener('click', (e) => {
     e.preventDefault();
@@ -13,7 +22,6 @@ buttons.addEventListener('click', (e) => {
     password = document.querySelector("#inputPassword2")
     if (e.target.id === 'signin') {
       loginEmail(email.value, password.value).then((result) => {
-        console.log(result);
         const user = result.user;
         loginSuccess(user.email, user.uid);
       })
@@ -22,7 +30,11 @@ buttons.addEventListener('click', (e) => {
       signupEmail(email.value, password.value) //
         .then((result) => {
           const user = result.user;
-          loginSuccess(user.email, user.uid);
+          db.collection("users").doc(email.value).set({
+            email : email.value,
+            password : password.value
+          });
+          login_area.innerHTML="회원가입이 완료되었습니다.";
         })
         .catch(()=> login_area.innerHTML="아이디가 이미 존재합니다.");
     }
