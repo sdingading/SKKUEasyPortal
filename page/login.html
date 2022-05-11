@@ -10,7 +10,23 @@
     <link href="../css/home.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Hi</h1>
+    <form class="row g-3 m-5">
+      <div class="col-auto">
+        <label for="inputEmail2" class="visually-hidden">Email</label>
+        <input type="email" class="form-control" id="inputEmail2" placeholder="email@example.com">
+      </div>
+      <div class="col-auto">
+        <label for="inputPassword2" class="visually-hidden">Password</label>
+        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+      </div>
+      <div id="buttons" class="col-auto">
+        <button id="signin" type="submit" class="btn btn-primary mb-3">로그인</button>
+        <button id="signup" type="submit" class="btn btn-primary mb-3">회원가입</button>
+      </div>
+      <div id="login-area">
+      </div>
+    </form>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -38,5 +54,6 @@
   };
   firebase.initializeApp(firebaseConfig);
   </script>
+  <script src="../js/login.js"></script>
   </body>
 </html>

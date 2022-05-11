@@ -98,7 +98,23 @@
     -->
     <!--add jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+    <script>
+      const firebaseConfig = {
+    apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
+    authDomain: "skkueasyportal.firebaseapp.com",
+    databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "skkueasyportal",
+    storageBucket: "skkueasyportal.appspot.com",
+    messagingSenderId: "1043329840201",
+    appId: "1:1043329840201:web:52eb93a09694215073bb98",
+    measurementId: "G-H5JYV5JV0Z",
+    };
+    firebase.initializeApp(firebaseConfig);
+    </script>
     <script>
       //timer
       const btns = document.querySelectorAll('.playButton');
@@ -108,6 +124,19 @@
         })
       });
 
+      //user login
+      var uid = 0;
+      firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+      // User is signed in, uid로 사용자 파일관리
+      uid = user.uid;
+      // ...
+      } else {
+      // User is signed out
+      location.href = "login.html";
+      }
+      });
+    
       
 
 
