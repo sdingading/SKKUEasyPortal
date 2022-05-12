@@ -4,20 +4,19 @@ const db = firebase.database();
 const signupEmail = (email,password) =>{
     firebase.auth().createUserWithEmailAndPassword(email,password)
     .then(()=>{
+      login_area.innerHTML="회원가입이 완료되었습니다.";
       uid = firebase.auth().currentUser.uid;
       db.ref('users/'+uid).set({
         email: email,
         password: password
+      }).then(()=>location.href="../page/home.html")
       })
-      .then(()=>{
-        login_area.innerHTML="회원가입이 완료되었습니다.";
-      });
-    })
     .catch((e)=>{
       if(e.code === 'auth/email-already-in-use')
        login_area.innerHTML ="아이디가 이미 존재합니다.";
       else if(e.code === 'auth/invalid-email')
       login_area.innerHTML ="이메일 형식이 잘못되었습니다.";
+      db.ref('users/'+uid).remove();
     });
     return 0;
 }
@@ -25,16 +24,6 @@ const loginEmail = (email,password)=>{
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     return firebase.auth().signInWithEmailAndPassword(email,password);
 }
-window.addEventListener("load",()=>{
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user)
-    db.ref('users/'+user.uid).get().then((snap)=>{
-      if(snap.exists() && user.uid){
-          location.href="../page/home.html";
-      }
-    })
-  })
-})
 const login_area = document.getElementById('login-area');
 buttons.addEventListener('click', (e) => {
     e.preventDefault();
