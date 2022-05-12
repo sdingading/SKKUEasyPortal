@@ -31,6 +31,8 @@ function loadBooks(){
   db.ref('users/'+uid+'/books/').get().then((snap)=>{
     if(snap.exists()){
       books = Object.values(snap.val());
+      console.log(books);
+      if(!books.find(val=>val.type===0)) books[0].type=0;
       initialBook = 1;
       books.forEach(addToList);
     }
@@ -77,6 +79,7 @@ containerClick.addEventListener("click",(e)=>{
   if(e.target===document.getElementById("gray-container")) 
     e.target.style.display = "none";
 })
+let doubleFlag = 0;
 function addToList(book){
   if(book.type === 1){
     let newBook = document.createElement("li");
@@ -86,7 +89,9 @@ function addToList(book){
     newBook.style.cursor="pointer";
     newBook.className ="book m-1";
     newBook.addEventListener("click",(e)=>{
+      if(doubleFlag === 0)
       if(e.target === newBook){
+        doubleFlag = 1;
         let booklist;
         let mainbook;
         db.ref('users/'+uid+'/books').get().then((snap)=>{
@@ -116,6 +121,7 @@ function addToList(book){
                 newBook.remove();
                 addToList(booklist)
                 document.querySelector("#booklet").style.display = "none";
+                doubleFlag = 0;
               });
           })
         }
