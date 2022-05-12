@@ -4,6 +4,7 @@ var uid = 0;
       // User is signed in, uid로 사용자 파일관리
       uid = user.uid;
       if(document.querySelector("#login")) document.querySelector("#login").remove();
+      if(document.querySelector("#logout")) document.querySelector("#logout").remove();
       let li = document.createElement("li");
       li.id= "logout"
       li.className ="dropdown-item"
@@ -15,6 +16,7 @@ var uid = 0;
       // ...
     } else {
       // User is signed out
+      if(document.querySelector("#login")) document.querySelector("#login").remove();
       if(document.querySelector("#logout"))document.querySelector("#logout").remove();
       let li = document.createElement("li");
       li.id= "login"
