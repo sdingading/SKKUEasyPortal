@@ -14,48 +14,39 @@
   <body>
     <div class="container">
       <div class="timerContainer" id="btnForTimer"> <!--timer Block-->
-        <div class="d-dayList"> D-DAY 목록 </div> <!--will show list of d-day if clicked-->
         <div class="timerSet">
           <div class="d-flex"> <!--timer1-->
-            <div id="d-day1" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 1">
+            <div class="subTitle"> Subject 1 </div>
+            <input type="text" class="subjectName" id="subject1" placeholder="과목 1">
             <button type='button' class='btnTimer'><p class='playButton play1'></p></button>
             <div id="timer1" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal1" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
           </div>
         </div>
 
         <div class="timerSet">
           <div class="d-flex"> <!--timer2-->
-            <div id="d-day2" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 2">
+            <div class="subTitle"> Subject 2 </div>
+            <input type="text" class="subjectName" id="subject2" placeholder="과목 2">
             <button type='button' class='btnTimer'><p class='playButton play2'></p></button>
             <div id="timer2" class="timeBox"> 00 : 00 : 00 </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal2" class="timeBox"> 00 : 00 : 00 </div> 
           </div>
         </div>
 
         <div class="timerSet">
           <div class="d-flex"> <!--timer3-->
-            <div id="d-day3" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 3">
+            <div class="subTitle"> Subject 3 </div>
+            <input type="text" class="subjectName" id="subject3" placeholder="과목 3">
             <button type='button' class='btnTimer'><p class='playButton play3'></p></button>
             <div id="timer3" class="timeBox"> 00 : 00 : 00 </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal3" class="timeBox"> 00 : 00 : 00 </div> 
           </div>
         </div>
 
         <div class="timerSet">
           <div class="d-flex"> <!--timer4-->
-            <div id="d-day4" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 4">
+            <div class="subTitle"> Subject 4 </div>
+            <input type="text" class="subjectName" id="subject4" placeholder="과목 4">
             <button type='button' class='btnTimer'><p class='playButton play4'></p></button>
-            <div id="timer4" class="timeBox">  00 : 00 : 00 </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal4" class="timeBox">  00 : 00 : 00 </div> 
+            <div id="timer4" class="timeBox">  00 : 00 : 00 </div> 
           </div>
         </div>
 
@@ -65,16 +56,39 @@
 
 
       <div class="row">
-        <!--To-do List-->
-        <div class="col"> 
-          todo
-        </div>
 
-    
-        <!--Calender-->
+        <!--d-day List-->
+        <div class="col">
+          <div class="container">
+            <div class="toDoContainer"> 
+              <table class="table table-hover my-8">
+                <h3 class = "mt-5 mb-4"> <strong>Useful Link for studying </strong></h3>
+                
+              </table>
+            </div>
+          </div>
+          
+        </div> 
+
+        <!--Link Table-->
         <div class="col"> 
-          calender
-        </div>
+          <div class="tableContainer"> 
+            <table class="table table-hover my-8">
+              <p id="tableLine" class="mt-4"> </p>
+              <h3 class = "mt-3 mb-4"> <strong>Useful Link for studying </strong></h3>
+              
+              <tr><td class="table-dark"><strong>Site Name</strong></td><td class="table-dark"><strong>Site URL</strong></td></tr>
+              <tr><td>SKKU 학술정보관</td> <td><a href="https://lib.skku.edu/#/" target="blank">https://lib.skku.edu/</a></td></tr>
+              <tr><td>RISS 학술연구정보</td> <td><a href="https://www.riss.kr/" target="blank">https://www.riss.kr/</a></td></tr>
+              <tr><td>K-MOOC</td> <td><a href="http://www.kmooc.kr/" target="blank">http://www.kmooc.kr/</a></td></tr>
+              <tr><td>KOCW 열린강좌</td> <td><a href="http://www.kocw.net/home/index.do" target="blank">http://www.kocw.net/home/index.do</a></td></tr>
+              <tr><td>Coursera 코세라</td> <td><a href="https://www.coursera.org/" target="blank">https://www.coursera.org/</a></td></tr>
+              <tr><td>BaekJoon 백준</td> <td><a href="https://www.acmicpc.net/" target="blank">https://www.acmicpc.net/</a></td></tr>
+              <tr><td>도타비</td> <td><a href="http://www.gunsys.com/gunsystem_pilgi.htm" target="blank">http://www.gunsys.com/gunsystem_pilgi.htm</a></td></tr>
+            </table>
+            <p id="tableLine"> </p>
+          </div>
+        </div> 
 
 
       </div>

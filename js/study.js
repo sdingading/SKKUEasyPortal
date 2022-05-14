@@ -20,25 +20,6 @@ const db = firebase.database();
 
 ///////////////timer////////////////
 
-//setting subject name
-//과목 이름 설정하기
-
-//더블클릭하면 다시 입력창 나오게
-
-
-let timers=[];
-
-//load and save
-function loadTimer(){
-    let getTimes = localStorage.getItem("timers");
-    if (!getTimes) return;
-    JSON.parse(getTimes).forEach(setTime);
-}
-
-function saveTimer(){
-    localStorage.getItem("timers", JSON.stringify(timers));
-}
-
 //timer function
 const Button = {
     play: 0,
@@ -46,7 +27,6 @@ const Button = {
 }
 
 window.addEventListener("load", () => {
-    loadTimer();
     let timerPlay = null; //for saving interval
 
     document.querySelectorAll('.playButton').forEach( function(timer){
@@ -71,12 +51,9 @@ window.addEventListener("load", () => {
         //create object
         let timeObj = {
             id: "timer"+a,
-            totalId : "timerTotal"+a,
             button: Button.play,
-            time: 0,
-            totalTime: getTotalTime();
+            time: 0
         }
-
 
         if (e.target.classList.contains('pauseButton')){
           timeObj.button = Button.pause;
@@ -90,38 +67,9 @@ window.addEventListener("load", () => {
             clearInterval(timerPlay);
           }
         }
-
-        //save
-        //timer box always starts with 00:00:00
-        timeObj.time = 0;
-        timeObj.button = Button.play;
-        saveTimer();
-        
       })
     });
   });
-
-  
-  //set Time when loaded
-  function setTime(timeObj){
-    let tsec = timeObj.totalTime;
-    let tmin = 0;
-    let thr = 0;
-
-    if (tsec>=60){
-      tsec=Math.floor(timeObj.totalTime%60);
-      tmin+=Math.floor(timeObj.totalTime/60);
-    }
-
-    if(tmin>=60){
-      tmin=Math.floor(tmin%3600);
-      thr+=Math.floor(thr/3600);
-    }
-
-    //display
-    let timeBox2 = document.getElementById(timeObj.totalId);
-    timeBox2.innerHTML = twoDigit(thr) + " : " + twoDigit(tmin) + " : " + twoDigit(tsec);  
-  }
 
   //time goes & display it
   function timePlay(timeObj){  
@@ -144,28 +92,6 @@ window.addEventListener("load", () => {
     //display
     let timeBox = document.getElementById(timeObj.id);
     timeBox.innerHTML = twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec);
-    
-    //total time box starts with saved time
-    timeObj.totalTime ++;
-
-    let tsec = timeObj.totalTime;
-    let tmin = 0;
-    let thr = 0;
-
-    if (tsec>=60){
-      tsec=Math.floor(timeObj.totalTime%60);
-      tmin+=Math.floor(timeObj.totalTime/60);
-    }
-
-    if(tmin>=60){
-      tmin=Math.floor(tmin%3600);
-      thr+=Math.floor(thr/3600);
-    }
-
-    //display
-    let timeBox2 = document.getElementById(timeObj.totalId);
-    timeBox2.innerHTML = twoDigit(thr) + " : " + twoDigit(tmin) + " : " + twoDigit(tsec);
-    saveTimer();
   }
 
   //for representing time in 2 digits
@@ -177,11 +103,3 @@ window.addEventListener("load", () => {
     }
     return num;
   }
-
-
-  //d-day
-
-
-
-
-  //to-do? 
