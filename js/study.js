@@ -7,7 +7,6 @@ if (user) {
 // User is signed in, uid로 사용자 파일관리
 uid = user.uid;
 
-
 // ...
 } else {
 // User is signed out
@@ -19,8 +18,6 @@ location.href = "login.html";
 const storage = firebase.storage();
 const db = firebase.database();
 
-
-
 ///////////////timer////////////////
 
 //setting subject name
@@ -29,15 +26,13 @@ const db = firebase.database();
 //더블클릭하면 다시 입력창 나오게
 
 
-
-
 let timers=[];
 
 //load and save
 function loadTimer(){
     let getTimes = localStorage.getItem("timers");
     if (!getTimes) return;
-    JSON.parse(getTimes).forEach(setTime); //setTime 함수 써야됨
+    JSON.parse(getTimes).forEach(setTime);
 }
 
 function saveTimer(){
@@ -51,7 +46,6 @@ const Button = {
 }
 
 window.addEventListener("load", () => {
-    
     loadTimer();
     let timerPlay = null; //for saving interval
 
@@ -80,7 +74,7 @@ window.addEventListener("load", () => {
             totalId : "timerTotal"+a,
             button: Button.play,
             time: 0,
-            totalTime: 0
+            totalTime: getTotalTime();
         }
 
 
@@ -100,16 +94,37 @@ window.addEventListener("load", () => {
         //save
         //timer box always starts with 00:00:00
         timeObj.time = 0;
+        timeObj.button = Button.play;
         saveTimer();
         
       })
     });
   });
 
-  //time goes & display it
+  
+  //set Time when loaded
+  function setTime(timeObj){
+    let tsec = timeObj.totalTime;
+    let tmin = 0;
+    let thr = 0;
 
-  function timePlay(timeObj){   
-   
+    if (tsec>=60){
+      tsec=Math.floor(timeObj.totalTime%60);
+      tmin+=Math.floor(timeObj.totalTime/60);
+    }
+
+    if(tmin>=60){
+      tmin=Math.floor(tmin%3600);
+      thr+=Math.floor(thr/3600);
+    }
+
+    //display
+    let timeBox2 = document.getElementById(timeObj.totalId);
+    timeBox2.innerHTML = twoDigit(thr) + " : " + twoDigit(tmin) + " : " + twoDigit(tsec);  
+  }
+
+  //time goes & display it
+  function timePlay(timeObj){  
     //timer box always starts with 00:00:00
     timeObj.time ++;
     let sec = timeObj.time;
@@ -164,10 +179,9 @@ window.addEventListener("load", () => {
   }
 
 
-  //to-do list
+  //d-day
 
 
 
 
-
-  //calender
+  //to-do? 
