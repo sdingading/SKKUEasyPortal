@@ -31,9 +31,9 @@
             <div id="d-day2" class="d-day"> D-0 </div><!--d-day-->
             <input type="text" class="subjectName" id="subject" placeholder="과목 2">
             <button type='button' class='btnTimer'><p class='playButton play2'></p></button>
-            <div id="timer2" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
+            <div id="timer2" class="timeBox"> 00 : 00 : 00 </div>  
             <p class="mx-5">Total</p>
-            <div id="timerTotal2" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
+            <div id="timerTotal2" class="timeBox"> 00 : 00 : 00 </div> 
           </div>
         </div>
 
@@ -42,9 +42,9 @@
             <div id="d-day3" class="d-day"> D-0 </div><!--d-day-->
             <input type="text" class="subjectName" id="subject" placeholder="과목 3">
             <button type='button' class='btnTimer'><p class='playButton play3'></p></button>
-            <div id="timer3" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
+            <div id="timer3" class="timeBox"> 00 : 00 : 00 </div>  
             <p class="mx-5">Total</p>
-            <div id="timerTotal3" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
+            <div id="timerTotal3" class="timeBox"> 00 : 00 : 00 </div> 
           </div>
         </div>
 
@@ -53,15 +53,15 @@
             <div id="d-day4" class="d-day"> D-0 </div><!--d-day-->
             <input type="text" class="subjectName" id="subject" placeholder="과목 4">
             <button type='button' class='btnTimer'><p class='playButton play4'></p></button>
-            <div id="timer4" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
+            <div id="timer4" class="timeBox">  00 : 00 : 00 </div>  
             <p class="mx-5">Total</p>
-            <div id="timerTotal4" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
+            <div id="timerTotal4" class="timeBox">  00 : 00 : 00 </div> 
           </div>
         </div>
 
         <p id="timerLine"> </p>
 
-      </div>
+      </div> <!--end of timer Block-->
 
 
       <div class="row">
@@ -81,11 +81,6 @@
 
 
   </div> <!--end of container-->
-  
-
-
-
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -115,63 +110,6 @@
     };
     firebase.initializeApp(firebaseConfig);
     </script>
-    <script>
-      //timer
-      const btns = document.querySelectorAll('.playButton');
-      btns.forEach( function(event){
-          event.addEventListener("click", function(){
-            event.classList.toggle('pauseButton');
-        })
-      });
-
-      //user login
-      var uid = 0;
-      firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-      // User is signed in, uid로 사용자 파일관리
-      uid = user.uid;
-      // ...
-      } else {
-      // User is signed out
-      location.href = "login.html";
-      }
-      });
-    
-      
-
-
-      /* 
-      버튼 토글..
-      var btnForTimer = document.querySelectorAll('#btnForTimer .playButton'); 
-      [].forEach.call(btnForTimer,function(bt){ 
-        bt.addEventListener("click",click,false); 
-      }); 
-      function click(e){
-        let playButton = document.querySelectorAll(".playButton");
-        playButton.classList.toggle('pauseButton'); 
-      }
-
-     
-      let playButton = document.querySelector(".playButton"); //얘가 맨위 하나만 가져와서 안됨
-
-      playButton.addEventListener('click', function(){
-        playButton.classList.toggle('pauseButton');
-      });
-      */
-     
-
-
-      
-  
-
-      //to-do list
-
-
-
-
-
-      //calender
-
-    </script>
+    <script src="../js/study.js"></script>
   </body>
 </html>

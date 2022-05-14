@@ -2,6 +2,7 @@
   "dependencies": {
     "bootstrap": "^5.1.3",
     "codemirror": "^5.65.3",
-    "codemirror-colorpicker": "^1.9.80"
+    "codemirror-colorpicker": "^1.9.80",
+    "firebase": "^9.8.1"
   }
 }
