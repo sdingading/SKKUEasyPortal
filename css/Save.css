@@ -27,12 +27,31 @@ body {
   content: attr(placeholder); 
   color: #ffffff;
 }
-
+.page{
+  position: relative;
+  display:inline-block;
+  background-color: #ffffff;
+  border-radius: 5px;
+  width:280px;
+  height:300px;
+}
+#list{
+  height:50%;
+  margin-left: 30px;
+  margin-right: 30px;
+  overflow-y: hidden;
+  display:flex;
+  flex-wrap: wrap;
+}
+#list:hover{
+  overflow-y: auto;
+}
 #tab{
   margin-left:50px;
   margin-right:30px;
-  overflow-y: hidden;
   display:flex;
+  overflow-y: hidden;
+  flex-wrap : wrap;
 }
 #tab:hover{
   overflow-y: auto;

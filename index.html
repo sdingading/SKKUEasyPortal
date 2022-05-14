@@ -13,8 +13,8 @@
 
 <main>
   <div class="d-flex flex-column  text-white sidebarbg" style="width: 220px; height:100%; min-height:620px">
-    <div class ="d-flex justify-content-center mt-4" onclick="changeIframe('page/home.html')" style="cursor:pointer">
-      <img src="images/SKKU_logo.png" style="mix-blend-mode: soft-light;width: 150px;height: auto;" alt="SKKU" >
+    <div class ="d-flex justify-content-center mt-4" >
+      <img src="images/SKKU_logo.png" href="page/home.html"style="mix-blend-mode: soft-light;width: 150px;height: auto; cursor: pointer;" alt="SKKU"  >
     </div>
     <ul class="nav nav-pills flex-column mt-5 mb-auto text-center">
       <li>
@@ -63,11 +63,10 @@
         <img src="images/unknown.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong>User</strong>
       </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+      <ul id="dropdown" class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
         <li><a class="dropdown-item" href="#">Settings</a></li>
         <li><a class="dropdown-item" href="#">Profile</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
       </ul>
     </div>
   </div>
@@ -76,5 +75,22 @@
   <script src="http://code.jquery.com/jquery-latest.js"></script> 
   </body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+  <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
+  authDomain: "skkueasyportal.firebaseapp.com",
+  databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "skkueasyportal",
+  storageBucket: "skkueasyportal.appspot.com",
+  messagingSenderId: "1043329840201",
+  appId: "1:1043329840201:web:52eb93a09694215073bb98",
+  measurementId: "G-H5JYV5JV0Z",
+  };
+  firebase.initializeApp(firebaseConfig);
+  </script>
   <script src="js/sidebars.js"></script>
 </html>

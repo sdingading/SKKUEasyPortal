@@ -13,10 +13,11 @@
 
     <title>암기해</title>
   </head>
-  
   <body>
     <div class="pageContainer d-flex flex-column" style="width:100vw; height:95vh; background-color:#6F5141; margin:30px 30px 0px 30px; border-radius: 32px;">
-      <div id="mainbook" class="book m-5" style="cursor: pointer; background-color: #FFFFFF;"> </div>
+      <input type = "file" id = "fileUpload" style = "width:150px;height:100px; margin-left:auto">
+      <div id = "list">
+      </div>
       <div id="booklet" class="booklet flex-column" style = "display:none; top:350px;left:60px">
         <div class="corn m-1"></div>
         <i id="Add" class="bi bi-plus fs-2 ms-auto me-4" style="color:#FFFFFF; cursor:pointer"></i>
@@ -46,13 +47,30 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+    <script>
+      const firebaseConfig = {
+    apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
+    authDomain: "skkueasyportal.firebaseapp.com",
+    databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "skkueasyportal",
+    storageBucket: "skkueasyportal.appspot.com",
+    messagingSenderId: "1043329840201",
+    appId: "1:1043329840201:web:52eb93a09694215073bb98",
+    measurementId: "G-H5JYV5JV0Z",
+    };
+    firebase.initializeApp(firebaseConfig);
+    </script>
     <script src="../js/save.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/codemirror-colorpicker@1.9.35/dist/codemirror-colorpicker.min.js" ></script>
 
     <script>
     let Color = CodeMirrorColorPicker.Color;
-    let bgColor = null;
-    let ftColor = null;
+    let bgColor = '#E39E81';
+    let ftColor = 'white';
     let bgnode = document.querySelector(".bgcolor-picker");
     let ftnode = document.querySelector(".ftcolor-picker");
       let bgpicker = new CodeMirrorColorPicker.create({
