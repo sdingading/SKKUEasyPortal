@@ -1,131 +1,159 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="../css/Search.css" rel="stylesheet">
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <div class="container my-4">
-      <div class="row">
-        <div class="col" id="js-mainNotice">
-          <div class="container">
-            <h3>공지사항</h3>
-            <table class="table talbe-striped">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="../css/Search.css" rel="stylesheet">
+
+  <title>Hello, world!</title>
+</head>
+<body>
+  <div class="container my-4">
+    <div class="row">
+      <div class="col" id="js-mainNotice">
+        <div class="container">
+          <h3>공지사항</h3>
+          <table class="table talbe-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">제목</th>
+                <th scope="col">날짜</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="col">1</th>
+                <th scope="col">제목1</th>
+                <th scope="col">날짜1</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col" id="js-todayMenu">
+        <div class="container">
+          <h3>오늘 학식</h3>
+          <div class="">
+            <table class="table table-striped">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">제목</th>
-                  <th scope="col">날짜</th>
+                  <th scope="col">행단골</th>
+                  <th scope="col">메뉴</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="col">1</th>
-                  <th scope="col">제목1</th>
-                  <th scope="col">날짜1</th>
+                  <th scope="col">아침</th>
+                  <th scope="col">밥 김치 국</th>
+                </tr>
+                <tr>
+                  <th scope="col">점심</th>
+                  <th scope="col">밥 김치 국</th>
+                </tr>
+                <tr>
+                  <th scope="col">저녁</th>
+                  <th scope="col">밥 김치 국</th>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <div class="row"> -->
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="auto">해오름식당</th>
+                  <th scope="col">메뉴</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="col">아침</th>
+                  <th scope="col">밥 김치 국</th>
+                </tr>
+                <tr>
+                  <th scope="col">점심</th>
+                  <th scope="col">밥 김치 국</th>
+                </tr>
+                <tr>
+                  <th scope="col">저녁</th>
+                  <th scope="col">밥 김치 국</th>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="col" id="js-todayMenu">
-          <div class="container">
-            <h3>오늘 학식</h3>
-            <div class="">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">행단골</th>
-                    <th scope="col">메뉴</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="col">아침</th>
-                    <th scope="col">밥 김치 국</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">점심</th>
-                    <th scope="col">밥 김치 국</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">저녁</th>
-                    <th scope="col">밥 김치 국</th>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- <div class="row"> -->
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="auto">해오름식당</th>
-                    <th scope="col">메뉴</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="col">아침</th>
-                    <th scope="col">밥 김치 국</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">점심</th>
-                    <th scope="col">밥 김치 국</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">저녁</th>
-                    <th scope="col">밥 김치 국</th>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
       </div>
-      <div class="container", id="js-tips">
-        <h3>꿀팁!@</h3>
-        <div class="row">
-          <div class="col">
-            <div class="card" id="tip_1" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title"><a href="#"> 이용법</a></h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text"><small class="text-muted">2022/02/02</small></p>
-                <img class="card-img-bottom" src="..." alt="IMG">
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="tip_2" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">DBPIA 이용법</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text"><small class="text-muted">2022/02/02</small></p>
-                <img class="card-img-bottom" src="..." alt="IMG">
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="tip_3" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">DBPIA 이용법</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text"><small class="text-muted">2022/02/02</small></p>
-                <img class="card-img-bottom" src="..." alt="IMG">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <iframe class="container-fluid" id="js-searchContent">
-      </iframe>
     </div>
-      
+    <div class="container" , id="js-tips">
+      <h3><i class="bi bi-caret-right-fill"></i>꿀팁!@</h3>
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card" id="tip-1" style="max-width: 25rem;">
+            <a href="#">
+              <img class="card-img-top"
+                src="https://cdn.pixabay.com/photo/2018/03/28/16/00/internet-3269652_960_720.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">교내 WIFI 사용법</h5>
+                <p class="card-text"> 교내 WIFI 사용법</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card" id="tip-2" style="max-width: 25rem;">
+            <a href="#">
+              <img class="card-img-top"
+                src="https://cdn.pixabay.com/photo/2022/04/17/21/57/international-7139072_960_720.png"
+                alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"> 졸업 요건 확인</h5>
+                <p class="card-text"> 소프트웨어대학 졸업 요건</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card" id="tip-3" style="max-width: 25rem;">
+            <a href="#">
+              <img class="card-img-top"
+                src="https://cdn.pixabay.com/photo/2015/11/20/09/36/republic-of-korea-1052662_960_720.jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">유생의 특권</h5>
+                <p class="card-text"> 성균관대 학생이면 사용 가능한 기능</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal -->
+    <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="myModalLabel">Modal title</h2>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4 id="myModalSubLable">subtitle</h4>
+            <p id="myModalContents" style="font-size: 1.2rem">contents</p>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <iframe class="container-fluid" id="js-searchContent">
+    </iframe>
+  </div>
 
 
 
@@ -133,33 +161,36 @@
 
 
 
-    <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-    <script>
-      const firebaseConfig = {
-    apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
-    authDomain: "skkueasyportal.firebaseapp.com",
-    databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "skkueasyportal",
-    storageBucket: "skkueasyportal.appspot.com",
-    messagingSenderId: "1043329840201",
-    appId: "1:1043329840201:web:52eb93a09694215073bb98",
-    measurementId: "G-H5JYV5JV0Z",
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
+      authDomain: "skkueasyportal.firebaseapp.com",
+      databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "skkueasyportal",
+      storageBucket: "skkueasyportal.appspot.com",
+      messagingSenderId: "1043329840201",
+      appId: "1:1043329840201:web:52eb93a09694215073bb98",
+      measurementId: "G-H5JYV5JV0Z",
     };
     firebase.initializeApp(firebaseConfig);
-    </script>
-    <script src="../js/search.js"></script>
+  </script>
+  <script src="../js/search.js"></script>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-  </body>
+</body>
 </html>
