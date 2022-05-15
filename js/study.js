@@ -23,9 +23,10 @@ function saveSubject(subject){
  
   db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
     subObj = Object.values(subs.val())
+    let subObj2 = subObj;
     subObj.forEach(e => {  
       if (subject.id === e.id){
-        let subObj2 = subObj.filter((element)=> element !== e)
+        subObj2 = subObj.filter((element)=> element !== e)
       }
     });
     db.ref('users/'+uid+'/subjects/').remove();
