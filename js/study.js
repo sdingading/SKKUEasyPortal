@@ -19,6 +19,28 @@ const db = firebase.database();
 
 let subObj=[];
 
+function saveSubject(subject){
+ 
+  db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
+    subObj = Object.values(subs.val())
+    subObj.forEach(e => {  
+      if (subject.id === e.id){
+        let subObj2 = subObj.filter((element)=> element !== e)
+      }
+    });
+    db.ref('users/'+uid+'/subjects/').remove();
+    for(let i=0; i<subObj2.length; i++){
+      db.ref('users/'+uid+'/subjects/').push(subObj2[i]);
+    }
+    db.ref('users/'+uid+'/subjects/').push(subject);
+    console.log('saved'); //testing
+  }).catch((error)=>{
+    console.log('not saved'); //testing
+    db.ref('users/'+uid+'/subjects/').push(subject);
+    return;
+  }) 
+}
+
 function loadSubjects(){
   db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
 
@@ -65,7 +87,7 @@ window.addEventListener("load", () => {
             id: a
           };
          
-          db.ref('users/'+uid+'/subjects/').push(subject);
+          saveSubject(subject);
           setTitle(subject);
         }
       })
