@@ -12,7 +12,6 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 }); 
 
-
 const storage = firebase.storage();
 const db = firebase.database();
 
@@ -20,29 +19,16 @@ const db = firebase.database();
 
 let subObj=[];
 
-//let subjects=[];
-//function saveSubjects(){
-  //local
-  //localStorage.setItem("subjects", JSON.stringify(subjects));
-//};
-
 function loadSubjects(){
   db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
 
     subObj = Object.values(subs.val());
     subObj.forEach(setTitle);
-    console.log('saved'); //testing
+    //console.log('saved'); //testing
   }).catch((error)=>{
-    console.log('not saved'); //testing
+    //console.log('not saved'); //testing
     return;
   })
-
-  /*//local
-  let lastSub = localStorage.getItem("subjects");
-			if (!lastSub) return;
-			subjects = JSON.parse(lastSub);
-			subjects.forEach(setTitle);
-  */
 };
 
 
@@ -56,7 +42,7 @@ window.addEventListener("load", () => {
       subject.addEventListener("keydown", e=>{
         if(e.key === 'Enter'){
           let input = e.target.value;
-          console.log(input); //확인용
+          //console.log(input); //확인용
   
           if (e.target.classList.contains("subject1")){
             a=1;
@@ -91,7 +77,6 @@ function setTitle(subject){
   let subTitle = document.querySelector('.subTitle'+subject.id);
   subTitle.innerText = subject.name;
 }
-
 
 //timer function
 const Button = {
@@ -224,7 +209,3 @@ window.addEventListener("load", () => {
 
   let secondSemester = document.querySelector('#secondSemester');
   secondSemester.innerText = "D"+calDday(2022,8,29)+" days";
-
-
-
-
