@@ -103,3 +103,55 @@ window.addEventListener("load", () => {
     }
     return num;
   }
+
+  ///////////////D-Day////////////////
+
+  function calDday(year,month,day){
+    const targetDay = new Date(year, month-1, day);
+    const today = new Date();
+    var dDay = today.getTime() - targetDay.getTime();
+    dDay = Math.floor(dDay/(1000*60*60*24));
+    if (dDay>0){
+      return "+"+dDay;
+    }
+    else
+      return dDay;
+  }
+
+  //display d-days
+  let finalStart = document.querySelector('#finalStart');
+  finalStart.innerText = "D"+calDday(2022,5,30)+" days";
+
+  let finalEnd = document.querySelector('#finalEnd');
+  finalEnd.innerText = "D"+calDday(2022,6,3)+" days";
+
+  let semesterEndStart = document.querySelector('#semesterEndStart');
+  semesterEndStart.innerText = "D"+calDday(2022,6,5)+" days";
+
+  let summerStart = document.querySelector('#summerStart');
+  summerStart.innerText = "D"+calDday(2022,6,7)+" days";
+
+  let summerEnd = document.querySelector('#summerEnd');
+  summerEnd.innerText = "D"+calDday(2022,6,23)+" days";
+
+  let scoreStart = document.querySelector('#scoreStart');
+  scoreStart.innerText = "D"+calDday(2022,6,10)+" days";
+
+  let scoreEnd = document.querySelector('#scoreEnd');
+  scoreEnd.innerText = "D"+calDday(2022,6,15)+" days";
+
+  let confirmStart = document.querySelector('#confirmStart');
+  confirmStart.innerText = "D"+calDday(2022,6,20)+" days";
+
+  let registerStart = document.querySelector('#registerStart');
+  registerStart.innerText = "D"+calDday(2022,8,16)+" days";
+
+  let registerEnd = document.querySelector('#registerEnd');
+  registerEnd.innerText = "D"+calDday(2022,8,22)+" days";
+
+  let secondSemester = document.querySelector('#secondSemester');
+  secondSemester.innerText = "D"+calDday(2022,8,29)+" days";
+
+
+
+
