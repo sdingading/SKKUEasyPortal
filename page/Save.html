@@ -9,44 +9,91 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="../css/Save.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror-colorpicker@1.9.35/dist/codemirror-colorpicker.css" />
+
     <title>암기해</title>
   </head>
   
   <body>
     <div class="pageContainer d-flex flex-column" style="width:100vw; height:95vh; background-color:#6F5141; margin:30px 30px 0px 30px; border-radius: 32px;">
-      <div id="mainbook" class="book ms-5 mt-5 mb-5" style="cursor: pointer;"></div>
+      <div id="mainbook" class="book m-5" style="cursor: pointer; background-color: #FFFFFF;"> </div>
+      <input type = "file" id = "fileUpload" style = "width:150px;height:100px; margin-left:auto">
+      <div id = "list">
+      </div>
       <div id="booklet" class="booklet flex-column" style = "display:none; top:350px;left:60px">
         <div class="corn m-1"></div>
         <i id="Add" class="bi bi-plus fs-2 ms-auto me-4" style="color:#FFFFFF; cursor:pointer"></i>
-          <div id = "tab">
-            <ul id ="list">
-            </ul>
+            <div id = "tab">
           </div>
       </div>
 
     </div>
     <div class="gray-container" id="gray-container">
-      <div id="setting" style="position:absolute; background-color:darkgrey; top:50%; left:50%; transform: translate(-50%, -50%); z-index:100">
-        <div class="color-picker"></div>
-        <div id="color-indicator" class ="color-indicator"></div>
-        <div id="color-picker"></div>
-        <button type="button" id="create" class="btn btn-primary ms-2 text-nowrap"><i class="bi bi-plus"></i>Add</button>
+      <div id="setting"  style="width:700px; height:500px; position:absolute; background-color:#ffffff; top:50%; left:50%; transform: translate(-50%, -50%); z-index:100">
+        <div class = "d-flex ms-5 mt-5">
+          <div>
+            <div class="color-show" style="width:224px; height:245px;background-color: #E39E81; box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25); color:#ffffff; text-align: center; line-height: 245px;">
+            <p class="letter" contenteditable placeholder="제목을 입력해주세요" style="word-break:break-all; outline:none"></p>
+            </div>
+            <p class ="letterColor" style="color:#6F5141; font-size: 20px; margin-top:10px; margin-bottom:0px">글씨 색상</p>
+            <div class="ftcolor-picker"></div>
+          </div>
+          <div style="margin-left:30px;margin-top:0">
+          <p class ="letterColor" style="color:#6F5141; font-size: 20px; margin-bottom: 0;">배경 색상</p>
+          <div class="bgcolor-picker"></div>
+        </div>
+        <button type="button" id="create" class="btn btn-primary ms-2 text-nowrap" style="height:40px"><i class="bi bi-plus"></i>Add</button>
+      </div>
       </div>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="../js/save.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <script>
-      let colorIndicator = document.getElementById('color-indicator');
-      let SethexColor = null;
-      const colorPicker = new iro.ColorPicker("#color-picker",{
-        width:180, color:"#fff"
-      });
-      colorPicker.on('color:change', function(color){
-        colorIndicator.style.backgroundColor = color.hexString;
-        SethexColor = color.hexString;
+      const firebaseConfig = {
+    apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
+    authDomain: "skkueasyportal.firebaseapp.com",
+    databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "skkueasyportal",
+    storageBucket: "skkueasyportal.appspot.com",
+    messagingSenderId: "1043329840201",
+    appId: "1:1043329840201:web:52eb93a09694215073bb98",
+    measurementId: "G-H5JYV5JV0Z",
+    };
+    firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="../js/save.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/codemirror-colorpicker@1.9.35/dist/codemirror-colorpicker.min.js" ></script>
+
+    <script>
+    let Color = CodeMirrorColorPicker.Color;
+    let bgColor = '#E39E81';
+    let ftColor = 'white';
+    let bgnode = document.querySelector(".bgcolor-picker");
+    let ftnode = document.querySelector(".ftcolor-picker");
+      let bgpicker = new CodeMirrorColorPicker.create({
+            position: 'inline',
+            container: bgnode,
+            type: 'ring',
+            color: '#E39E81',
+            onChange: function(color){
+              bgColor = color;
+              document.querySelector(".color-show").style.backgroundColor = color;
+            }
+        });
+      let ftpicker = new CodeMirrorColorPicker.create({
+            position: 'inline',
+            container: ftnode,
+            type: 'palette',
+            color: 'white',
+            onChange: function(color){
+              ftColor = color;
+              document.querySelector(".color-show").style.color = color;
+            }
       });
     </script>
   </body>
