@@ -1,17 +1,15 @@
-//for firebase
-
 //user login
 var uid = 0;
 firebase.auth().onAuthStateChanged((user) => {
-if (user) {
-// User is signed in, uid로 사용자 파일관리
-uid = user.uid;
-
-// ...
-} else {
-// User is signed out
-location.href = "login.html";
-}
+  if (user) {
+    // User is signed in, uid로 사용자 파일관리
+    uid = user.uid;
+    loadSubjects();
+    // ...
+  } else {
+  // User is signed out
+  location.href = "login.html";
+  }
 }); 
 
 
@@ -19,6 +17,81 @@ const storage = firebase.storage();
 const db = firebase.database();
 
 ///////////////timer////////////////
+
+let subObj=[];
+
+//let subjects=[];
+//function saveSubjects(){
+  //local
+  //localStorage.setItem("subjects", JSON.stringify(subjects));
+//};
+
+function loadSubjects(){
+  db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
+
+    subObj = Object.values(subs.val());
+    subObj.forEach(setTitle);
+    console.log('saved'); //testing
+  }).catch((error)=>{
+    console.log('not saved'); //testing
+    return;
+  })
+
+  /*//local
+  let lastSub = localStorage.getItem("subjects");
+			if (!lastSub) return;
+			subjects = JSON.parse(lastSub);
+			subjects.forEach(setTitle);
+  */
+};
+
+
+//title
+window.addEventListener("load", () => {
+
+  document.querySelectorAll('.subjectName').forEach( function(subject){
+
+    if(subject.classList.contains('text')){
+
+      subject.addEventListener("keydown", e=>{
+        if(e.key === 'Enter'){
+          let input = e.target.value;
+          console.log(input); //확인용
+  
+          if (e.target.classList.contains("subject1")){
+            a=1;
+          }
+  
+          else if (e.target.classList.contains("subject2")){
+            a=2;
+          }
+  
+          else if (e.target.classList.contains("subject3")){
+            a=3;
+          }
+  
+          else if (e.target.classList.contains("subject4")){
+            a=4;
+          }
+  
+          let subject = {
+            name: input,
+            id: a
+          };
+         
+          db.ref('users/'+uid+'/subjects/').push(subject);
+          setTitle(subject);
+        }
+      })
+    }
+  })
+})
+
+function setTitle(subject){
+  let subTitle = document.querySelector('.subTitle'+subject.id);
+  subTitle.innerText = subject.name;
+}
+
 
 //timer function
 const Button = {
