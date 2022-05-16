@@ -1,5 +1,6 @@
 let uid = 0;
 let mainbookUID = 0;
+
 let buttonCreate = document.querySelector("#Add");
 const fileInput = document.getElementById("FileUpload");
 const storage = firebase.storage();
@@ -92,6 +93,7 @@ function addPage(url){
   let list = document.querySelector("#list");
   list.insertBefore(embed,list.firstChild);
 }
+
 function check_length(area){
   let text = area.value;
   const max_length = 15;
