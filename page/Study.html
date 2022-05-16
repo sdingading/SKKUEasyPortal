@@ -12,90 +12,109 @@
     
   </head>
   <body>
-    <div class="container">
+    <div class="container"> 
       <div class="timerContainer" id="btnForTimer"> <!--timer Block-->
-        <div class="d-dayList"> D-DAY 목록 </div> <!--will show list of d-day if clicked-->
+        <div class="row">
+          <div class="col">
+            <div class="timerTitle"> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
+              <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/>
+              <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+            </svg> <strong>Timer</strong> </div>
+          </div>
+          <div class="col"><p id="titleLine"> </p></div>
+        </div>
+
         <div class="timerSet">
           <div class="d-flex"> <!--timer1-->
-            <div id="d-day1" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 1">
+            <input type="text" class="text subjectName subject1" id="subject1" placeholder="과목 1">
+            <div class="subTitle subTitle1"> Subject 1 </div>
             <button type='button' class='btnTimer'><p class='playButton play1'></p></button>
             <div id="timer1" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal1" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
           </div>
         </div>
 
         <div class="timerSet">
           <div class="d-flex"> <!--timer2-->
-            <div id="d-day2" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 2">
+            <input type="text" class="text subjectName subject2" id="subject2" placeholder="과목 2">
+            <div class="subTitle subTitle2"> Subject 2 </div>
             <button type='button' class='btnTimer'><p class='playButton play2'></p></button>
-            <div id="timer2" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal2" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
+            <div id="timer2" class="timeBox"> 00 : 00 : 00 </div>  
           </div>
         </div>
 
         <div class="timerSet">
           <div class="d-flex"> <!--timer3-->
-            <div id="d-day3" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 3">
+            <input type="text" class="text subjectName subject3" id="subject3" placeholder="과목 3">
+            <div class="subTitle subTitle3"> Subject 3 </div>
             <button type='button' class='btnTimer'><p class='playButton play3'></p></button>
-            <div id="timer3" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal3" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
+            <div id="timer3" class="timeBox"> 00 : 00 : 00 </div>  
           </div>
         </div>
 
         <div class="timerSet">
           <div class="d-flex"> <!--timer4-->
-            <div id="d-day4" class="d-day"> D-0 </div><!--d-day-->
-            <input type="text" class="subjectName" id="subject" placeholder="과목 4">
+            <input type="text" class="text subjectName subject4" id="subject4" placeholder="과목 4">
+            <div class="subTitle subTitle4"> Subject 4 </div>
             <button type='button' class='btnTimer'><p class='playButton play4'></p></button>
-            <div id="timer4" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div>  
-            <p class="mx-5">Total</p>
-            <div id="timerTotal4" class="timeBox"> <strong>  00 : 00 : 00 </strong> </div> 
+            <div id="timer4" class="timeBox">  00 : 00 : 00 </div> 
           </div>
         </div>
 
         <p id="timerLine"> </p>
 
-      </div>
+      </div> <!--end of timer Block-->
 
-
+      
       <div class="row">
-        <!--To-do List-->
+
+        <!--Total Time List-->
+        <div class="col">
+          <div class="container">
+            <div class="toDoContainer">
+              <table class="table table-hover my-8">
+                <p id="tableLine" class="mt-4"> </p>
+                <h3 class = "dDayTable mt-3 mb-4"> <strong>D-Day left for . . . </strong></h3>   
+                <tr bgcolor="#ebb01"><td>Upcoming Event</td><td>Start Day</td><td>End Day</td></tr>
+                <tr><td>22-1 기말고사</td><td id="finalStart"> </td><td id="finalEnd"> </td></tr>
+                <tr><td>1학기 종강</td><td id="semesterEndStart"> </td><td>-- </td></tr>
+                <tr><td>여름 계절학기</td><td id="summerStart"> </td><td id="summerEnd"> </td></tr>
+                <tr><td>1학기 성적공시</td><td id="scoreStart"> </td><td id="scoreEnd">-- </td></tr>
+                <tr><td>1학기 성적확정</td><td id="confirmStart"> </td><td>-- </td></tr>
+                <tr><td>2학기 수강신청</td><td id="registerStart"> </td><td id="registerEnd"> </td></tr>
+                <tr><td>2학기 개강</td><td id="secondSemester"> </td><td> -- </td></tr>
+              </table>
+              
+            </div>
+          </div>
+          
+        </div> 
+
+        <!--Link Table-->
         <div class="col"> 
-          todo
-        </div>
-
-    
-        <!--Calender-->
-        <div class="col"> 
-          calender
-        </div>
-
-
+          <div class="tableContainer"> 
+            <table class="table table-hover my-8">
+              <p id="tableLine" class="mt-4"> </p>
+              <h3 class = "mt-3 mb-4"> <strong>Useful Link for studying </strong></h3>
+              
+              <tr bgcolor="#ebb01"><td><strong>Site Name</strong></td><td><strong>Site URL</strong></td></tr>
+              <tr><td>edWith</td> <td><a href="https://www.edwith.org/" target="blank">https://www.edwith.org/</a></td></tr>
+              <tr><td>Star_Mooc</td> <td><a href="https://www.starmooc.kr/" target="blank">https://www.starmooc.kr/</a></td></tr>
+              <tr><td>K-MOOC</td> <td><a href="http://www.kmooc.kr/" target="blank">http://www.kmooc.kr/</a></td></tr>
+              <tr><td>KOCW 열린강좌</td> <td><a href="http://www.kocw.net/home/index.do" target="blank">http://www.kocw.net/home/index.do</a></td></tr>
+              <tr><td>Coursera 코세라</td> <td><a href="https://www.coursera.org/" target="blank">https://www.coursera.org/</a></td></tr>
+              <tr><td>BaekJoon 백준</td> <td><a href="https://www.acmicpc.net/" target="blank">https://www.acmicpc.net/</a></td></tr>
+              <tr><td>이솦</td> <td><a href="https://www.ebssw.kr/" target="blank">https://www.ebssw.kr/</a></td></tr>
+            </table>
+          </div>
+        </div> 
       </div>
 
 
   </div> <!--end of container-->
-  
-
-
-
-
-
-    <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
+ 
     <!--add jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
@@ -115,63 +134,6 @@
     };
     firebase.initializeApp(firebaseConfig);
     </script>
-    <script>
-      //timer
-      const btns = document.querySelectorAll('.playButton');
-      btns.forEach( function(event){
-          event.addEventListener("click", function(){
-            event.classList.toggle('pauseButton');
-        })
-      });
-
-      //user login
-      var uid = 0;
-      firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-      // User is signed in, uid로 사용자 파일관리
-      uid = user.uid;
-      // ...
-      } else {
-      // User is signed out
-      location.href = "login.html";
-      }
-      });
-    
-      
-
-
-      /* 
-      버튼 토글..
-      var btnForTimer = document.querySelectorAll('#btnForTimer .playButton'); 
-      [].forEach.call(btnForTimer,function(bt){ 
-        bt.addEventListener("click",click,false); 
-      }); 
-      function click(e){
-        let playButton = document.querySelectorAll(".playButton");
-        playButton.classList.toggle('pauseButton'); 
-      }
-
-     
-      let playButton = document.querySelector(".playButton"); //얘가 맨위 하나만 가져와서 안됨
-
-      playButton.addEventListener('click', function(){
-        playButton.classList.toggle('pauseButton');
-      });
-      */
-     
-
-
-      
-  
-
-      //to-do list
-
-
-
-
-
-      //calender
-
-    </script>
+    <script src="../js/study.js"></script>
   </body>
 </html>
