@@ -75,10 +75,6 @@ function loadPages(){
   storage.ref().child('users/' + uid + '/' + mainbookUID).listAll().then((res)=>
     res.items.forEach((itemRef)=>{
       itemRef.getDownloadURL().then((url)=>{
-        let xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.open('GET',url);
-        xhr.send();
         addPage(url);
       })
     })
@@ -120,10 +116,6 @@ fileInput.addEventListener("change",(e) =>{
   ()=>{
     fileRef = uploadPath;
     fileRef.getDownloadURL().then((url)=>{
-      let xhr = new XMLHttpRequest();
-      xhr.responseType = 'blob';
-      xhr.open('GET',url);
-      xhr.send();
       addPage(url);
     })
   });
