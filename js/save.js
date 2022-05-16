@@ -71,7 +71,7 @@ function loadBooks(){
   });
 }
 function loadPages(){
-  console.log(mainbookUID);
+
   storage.ref().child('users/' + uid + '/' + mainbookUID).listAll().then((res)=>
     res.items.forEach((itemRef)=>{
       itemRef.getDownloadURL().then((url)=>{
