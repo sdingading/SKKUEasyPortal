@@ -1,5 +1,5 @@
-var uid = 0;
-
+let uid = 0;
+let mainbookUID = 0;
 let buttonCreate = document.querySelector("#Add");
 const fileInput = document.getElementById("FileUpload");
 const storage = firebase.storage();
@@ -57,6 +57,13 @@ function loadBooks(){
       }
       books.forEach(addToList);
       document.querySelector("#InputBook").remove();
+      db.ref('users/'+uid+'/books').get().then((snap)=>{
+        let mainbookindex;
+        Object.values(snap.val()).find((val,i)=>{
+          if(val.type === 1)mainbookindex = i;
+        })
+        mainbookUID =Object.keys(snap.val())[mainbookindex];
+      })
     }
   });
 }
@@ -78,7 +85,7 @@ function check_length(area){
 const handleFiles = (e) =>{
   const selectedFile = fileInput.files[0];
   const storageRef = storage.ref();
-  const uploadPath = storageRef.child(uid + '/' + selectedFile.name);
+  const uploadPath = storageRef.child(uid + '/' + mainbookUID +'/'+selectedFile.name);
   const upload = uploadPath.put(selectedFile);
   upload.on('state_changed',
   //변화시 동작하는 함수
@@ -135,7 +142,7 @@ function addToList(book){
               mainbookindex = i;
               return val;
             }})
-
+           mainbookUID =Object.keys(snap.val())[mainbookindex];
           //update Database
           db.ref('users/'+uid+'/books/'+Object.keys(snap.val())[bookindex]).update({type:1})
             .then(()=>{
