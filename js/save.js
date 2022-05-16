@@ -1,4 +1,5 @@
-var uid = 0;
+let uid = 0;
+let mainbookUID = 0;
 
 let buttonCreate = document.querySelector("#Add");
 const fileInput = document.getElementById("FileUpload");
@@ -57,12 +58,40 @@ function loadBooks(){
       }
       books.forEach(addToList);
       document.querySelector("#InputBook").remove();
+      document.querySelector("#filebox").style.pointerEvents = "auto";
+      let mainbookindex;
+       Object.values(snap.val()).find((val,i)=>{
+      if(val.type === 1)mainbookindex = i;
+      })
+      db.ref('users/'+uid+'/books').get().then((snap)=>{
+        mainbookUID =Object.keys(snap.val())[mainbookindex];
+        loadPages();
+      })
     }
   });
 }
 function loadPages(){
+  console.log(mainbookUID);
+  storage.ref().child('users/' + uid + '/' + mainbookUID).listAll().then((res)=>
+    res.items.forEach((itemRef)=>{
+      itemRef.getDownloadURL().then((url)=>{
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.open('GET',url);
+        xhr.send();
+        addPage(url);
+      })
+    })
+  )
 }
-function savePages(){
+function addPage(url){
+  let embed = document.createElement("embed");
+  embed.id = "page";
+  embed.className = "page m-3";
+  embed.src= url;
+
+  let list = document.querySelector("#list");
+  list.insertBefore(embed,list.firstChild);
 }
 
 function check_length(area){
@@ -75,10 +104,10 @@ function check_length(area){
   document.querySelector("#color-show").innerHTML=`<p>${text}</p>`
 }
 
-const handleFiles = (e) =>{
+fileInput.addEventListener("change",(e) =>{
   const selectedFile = fileInput.files[0];
   const storageRef = storage.ref();
-  const uploadPath = storageRef.child(uid + '/' + selectedFile.name);
+  const uploadPath = storageRef.child('users/' + uid + '/' + mainbookUID +'/'+ selectedFile.name);
   const upload = uploadPath.put(selectedFile);
   upload.on('state_changed',
   //변화시 동작하는 함수
@@ -88,16 +117,17 @@ const handleFiles = (e) =>{
     console.error(error);
   },
   //성공시 동작하는 함수
-  ()=>{});
-  let selectedFile_url = URL.createObjectURL(selectedFile);
-  let embed = document.createElement("embed");
-  embed.id = "page";
-  embed.className = "page m-3";
-  embed.src= selectedFile_url;
-  let list = document.querySelector("#list");
-  list.insertBefore(embed,list.firstChild);
-};
-fileInput.addEventListener("change",handleFiles);
+  ()=>{
+    fileRef = uploadPath;
+    fileRef.getDownloadURL().then((url)=>{
+      let xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.open('GET',url);
+      xhr.send();
+      addPage(url);
+    })
+  });
+  });
 
 let buttonMainBook = document.querySelector("#mainbook");
 
@@ -126,6 +156,7 @@ function addToList(book){
           booklist = Object.values(snap.val()).find((val,i)=>{
             if(JSON.stringify(book) === JSON.stringify(val)){
               bookindex= i;
+              mainbookUID =Object.keys(snap.val())[bookindex];
               return val;
             }})
             
@@ -135,7 +166,6 @@ function addToList(book){
               mainbookindex = i;
               return val;
             }})
-
           //update Database
           db.ref('users/'+uid+'/books/'+Object.keys(snap.val())[bookindex]).update({type:1})
             .then(()=>{
@@ -148,6 +178,8 @@ function addToList(book){
                   newBook.remove();
                   addToList(mainbook);
                   addToList(booklist);
+                  if(document.querySelectorAll("#page") != null) document.querySelectorAll("#page").forEach((document)=>document.remove());
+                  loadPages();
                   document.querySelector("#booklet").style.display = "none";
                   doubleFlag = 0;
               });
@@ -192,12 +224,12 @@ buttonCreate.addEventListener("click",()=>{
   let initialBook = 0;
   if(document.querySelector("#InputBook")){
     document.querySelector("#InputBook").remove();
+    document.querySelector("#filebox").style.pointerEvents = "auto";
     initialBook = 1;
   }
   let book = {
     backgroundColor : bgColor,
     color : ftColor,
-    page : [0],
     text: `<p>${document.querySelector(".letter").value}<p>`,
     type : initialBook,
   }
