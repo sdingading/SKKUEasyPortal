@@ -1,6 +1,6 @@
 let uid = 0;
 let mainbookUID = 0;
-
+let count = 0;
 let buttonCreate = document.querySelector("#Add");
 const fileInput = document.getElementById("FileUpload");
 const storage = firebase.storage();
@@ -52,6 +52,7 @@ function loadBooks(){
 
   db.ref('users/'+uid+'/books/').get().then((snap)=>{
     if(snap.exists()){
+      count = Object.keys(snap.val()).length;
       let books = Object.values(snap.val());
       if(!books.find(val=>val.type===1)){
         books[0].type=1;
@@ -63,10 +64,8 @@ function loadBooks(){
        Object.values(snap.val()).find((val,i)=>{
       if(val.type === 1)mainbookindex = i;
       })
-      db.ref('users/'+uid+'/books').get().then((snap)=>{
         mainbookUID =Object.keys(snap.val())[mainbookindex];
         loadPages();
-      })
     }
   });
 }
@@ -222,9 +221,11 @@ buttonCreate.addEventListener("click",()=>{
   let book = {
     backgroundColor : bgColor,
     color : ftColor,
+    number : count,
     text: `<p>${document.querySelector(".letter").value}<p>`,
     type : initialBook,
   }
+  count++;
   db.ref('users/'+uid+"/"+"books").push().set(book);
   addToList(book)
 })
