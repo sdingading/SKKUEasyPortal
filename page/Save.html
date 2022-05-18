@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="pageContainer d-flex flex-column">
-      <div id="InputBook" class="book m-5 position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <div id="InputBook" class="book m-5 position-relative" data-bs-toggle="modal" data-bs-target="#BookMake">
         <i class="bi bi-plus fs-3 position-absolute top-50 start-50 translate-middle"></i>
       </div>
       <div id="filebox" class="ms-auto me-5">
@@ -26,17 +26,35 @@
       </div>
       <div id="booklet" class="booklet flex-column">
         <div class="corn m-1"></div>
-        <button type="button" class="bi bi-plus fs-2 ms-auto me-4" style="border:none; background-color:transparent; color:#FFFFFF"data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+        <button type="button" class="bi bi-plus fs-2 ms-auto me-4" style="border:none; background-color:transparent; color:#FFFFFF"data-bs-toggle="modal" data-bs-target="#BookMake"></button>
             <div id = "tab">
           </div>
       </div>
-
+    
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <button type="button" id="LoadButton" style="display:none" data-bs-toggle="modal" data-bs-target="#Load"></button>
+    
+    <div class="modal" id="Load" z-index="9000" style="pointer-events: none;">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="text-center">
+            <div class="loadingio-spinner"><div class="Loading">
+              <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+              </div></div>
+            <p>데이터 처리중 입니다.<br>잠시만 기다려주세요.</p>
+            </div>
+            <button type="button" id="CompleteButton" style="display:none" data-bs-dismiss="modal"></button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="BookMake" tabindex="-1" aria-labelledby="BookMakeLabel" aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" style="max-width:540px">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">책 만들기</h5>
+            <h5 class="modal-title" id="BookMakeLabel">책 만들기</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
