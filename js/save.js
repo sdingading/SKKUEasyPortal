@@ -7,9 +7,10 @@ const storage = firebase.storage();
 const db = firebase.database();
 const Type = {
   list:0,
-  main:1,
+  main:1, 
 }
 window.addEventListener("load",()=>{
+  document.getElementById("LoadButton").click();
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, uid로 사용자 파일관리
@@ -20,6 +21,7 @@ window.addEventListener("load",()=>{
       // User is signed out
       location.href = "login.html";
     }
+    
 });
 })
 //Color Picker
@@ -67,6 +69,7 @@ function loadBooks(){
         mainbookUID =Object.keys(snap.val())[mainbookindex];
         loadPages();
     }
+    document.getElementById("CompleteButton").click();
   });
 }
 function loadPages(){
@@ -74,19 +77,37 @@ function loadPages(){
   storage.ref().child('users/' + uid + '/' + mainbookUID).listAll().then((res)=>
     res.items.forEach((itemRef)=>{
       itemRef.getDownloadURL().then((url)=>{
-        addPage(url);
+        addPage(url,itemRef);
       })
     })
   )
 }
-function addPage(url){
+function addPage(url,Ref){
+  let div = document.createElement("div");
+  div.id = "page";
+  div.className = "page m-3";
+  let tab = document.createElement("div");
+  tab.className="d-flex";
+  tab.style="width:250px;height:25px;";
+  let p = document.createElement("p");
+  p.textContent = Ref.name;
+  p.style="margin-left:5px;margin-bottom:0px;width:200px;height:25px;overflow:hidden;text-overflow:ellipsis; color:#6F5141;"
+  div.style=" textAlign:center; background-color:#F9EDE1";
+  let icon = document.createElement("i");
+  icon.className="bi bi-x ms-auto";
+  icon.style ="cursor:pointer;"
+  icon.addEventListener("click",()=>{
+    storage.ref().child(Ref.fullPath).delete().then(div.remove());
+  })
+  tab.appendChild(p);
+  tab.appendChild(icon);
   let embed = document.createElement("embed");
-  embed.id = "page";
-  embed.className = "page m-3";
+  embed.style="width:250px;height:275px;";
   embed.src= url;
-
+  div.appendChild(tab);
+  div.appendChild(embed);
   let list = document.querySelector("#list");
-  list.insertBefore(embed,list.firstChild);
+  list.insertBefore(div,list.firstChild);
 }
 
 function check_length(area){
@@ -115,7 +136,7 @@ fileInput.addEventListener("change",(e) =>{
   ()=>{
     fileRef = uploadPath;
     fileRef.getDownloadURL().then((url)=>{
-      addPage(url);
+      addPage(url,fileRef);
     })
   });
   });
