@@ -15,77 +15,34 @@
 <body>
   <div class="container my-4">
     <div class="row">
-      <div class="col" id="js-mainNotice">
-        <div class="container">
-          <h3>공지사항</h3>
-          <table class="table talbe-striped">
+      <div class="container border-bottom border-3 border-dark  p-4 mb-5">
+        <h2>자유게시판</h2>
+        <div>
+          <span id="postNum" style="display: none;"></span>
+          <table class="table table-hover text-center" id="postTable">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">제목</th>
-                <th scope="col">날짜</th>
+                <th class="col-1">#</th>
+                <th class="col-7">제목</th>
+                <th class="col-2">글쓴이</th>
+                <th class="col-2">날짜</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="col">1</th>
-                <th scope="col">제목1</th>
-                <th scope="col">날짜1</th>
-              </tr>
+            <tbody id="postContents">
+
             </tbody>
           </table>
         </div>
-      </div>
-      <div class="col" id="js-todayMenu">
-        <div class="container">
-          <h3>오늘 학식</h3>
-          <div class="">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">행단골</th>
-                  <th scope="col">메뉴</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="col">아침</th>
-                  <th scope="col">밥 김치 국</th>
-                </tr>
-                <tr>
-                  <th scope="col">점심</th>
-                  <th scope="col">밥 김치 국</th>
-                </tr>
-                <tr>
-                  <th scope="col">저녁</th>
-                  <th scope="col">밥 김치 국</th>
-                </tr>
-              </tbody>
-            </table>
-            <!-- <div class="row"> -->
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="auto">해오름식당</th>
-                  <th scope="col">메뉴</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="col">아침</th>
-                  <th scope="col">밥 김치 국</th>
-                </tr>
-                <tr>
-                  <th scope="col">점심</th>
-                  <th scope="col">밥 김치 국</th>
-                </tr>
-                <tr>
-                  <th scope="col">저녁</th>
-                  <th scope="col">밥 김치 국</th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+
+        <div>
+          <ul id="postPagingList" class="pagination justify-content-center">
+            <!-- <li><button href="#" class="btn text-secondary mx-1 btn-outline-secondary" onclick="loadPosts(1)">1</button>
+            </li>
+            <li><button href="#" class="btn text-secondary mx-1 btn-outline-secondary" onclick="loadPosts(2)">2</button>
+            </li> -->
+          </ul>
+
+          <button class="btn btn-outline-primary" style="float:right" onclick="showCreatePostModal()">글쓰기</button>
         </div>
       </div>
     </div>
@@ -124,8 +81,8 @@
                 src="https://cdn.pixabay.com/photo/2015/11/20/09/36/republic-of-korea-1052662_960_720.jpg"
                 alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">유생의 특권</h5>
-                <p class="card-text"> 성균관대 학생이면 사용 가능한 기능</p>
+                <h5 class="card-title">누려라, 성대생</h5>
+                <p class="card-text"> 성균관대 재학생들에게 제공되는 서비스, S/W</p>
               </div>
             </a>
           </div>
@@ -138,8 +95,8 @@
         <div class="modal-content">
           <div class="modal-header">
             <h2 class="modal-title" id="myModalLabel">Modal title</h2>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+            <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <!-- <span aria-hidden="true">&times;</span> -->
             </button>
           </div>
           <div class="modal-body">
@@ -151,18 +108,76 @@
         </div>
       </div>
     </div>
+    <!-- createPostModal -->
+    <div class="modal fade " id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="createPostModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="createPostModalLabel">글 작성</h2>
+            <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <!-- <span aria-hidden="true">&times;</span> -->
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table">
+              <tr>
+                <td>제목</td>
+                <td><input type="text" class="form-control" id="postTitle"></td>
+              </tr>
+              <tr>
+                <td>작성자</td>
+                <td><input type="text" class="form-control" id="postAuthor"></td>
+              </tr>
+              <tr>
+                <td>내용</td>
+                <td><textarea name="" class="form-control" id="postContent" cols="30" rows="10"></textarea></td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button id="btnCreatePost" class="btn btn-success close" data-bs-dismiss="modal">작성</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- showPostModal -->
+    <div class="modal fade " id="showPostModal" tabindex="-1" role="dialog" aria-labelledby="showPostModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="showPostModalLabel">제목</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <!-- <span aria-hidden="true">&times;</span> -->
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <small> 작성자 : <span id="showPostModalAuthor">감자</span><br>
+                날 짜 : <span id="showPostModalTime">22.01.01</span><br><br>
+              </small>
+            </div>
+            <p id="showPostModalContent"> 여기에 contents</p>
+          </div>
+          <div class="modal-footer">
+            <button id="deletePostBtn" class="btn btn-danger" style="display:none" onclick="">삭제</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <iframe class="container-fluid" id="js-searchContent">
     </iframe>
   </div>
 
 
-  
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
   <script>
     const firebaseConfig = {
@@ -180,5 +195,5 @@
   <script src="../js/search.js"></script>
 
 
-  </body>
+</body>
 </html>
