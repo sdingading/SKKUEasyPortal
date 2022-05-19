@@ -1,9 +1,15 @@
 // database
 var uid = 0;
+const storage = firebase.storage();
+const db = firebase.database();
+let postN = 0;
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, uid로 사용자 파일관리
     uid = user.uid;
+    // loadPosts(1);
+    createPaging(1);
     // ...
   } else {
     // User is signed out
@@ -11,10 +17,168 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
-function changeIframe(url) {
-  document.getElementById("js-searchContent").src = url;
+// Post
+function saveNewPost() {
+  db.ref("post/")
+    .get()
+    .then((subs) => {
+      // db.ref("post/").remove();
+      let len = Object.keys(subs.val()).length;
+      let pTime = `${new Date().getFullYear()}.${
+        new Date().getMonth() + 1
+      }.${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()}`;
+      let pTitle = document.querySelector("#postTitle").value;
+      let pAuthor = document.querySelector("#postAuthor").value;
+      let pContent = document.querySelector("#postContent").value;
+      let p = {
+        id: len + 1,
+        title: pTitle,
+        updTime: pTime,
+        userID: uid,
+        author: pAuthor,
+        content: pContent,
+      };
+      db.ref("post/").push(p);
+      document.querySelector("#postTitle").value = "";
+      document.querySelector("#postAuthor").value = "";
+      document.querySelector("#postContent").value = "";
+      // console.log("saved");
+      // loadPosts(1);
+      createPaging(1);
+    })
+    .catch((error) => {
+      console.log("not saved"); //testing
+      return;
+    });
 }
 
+function deletePost(_id, delTar) {
+  if (_id === uid) {
+    let checkDel = confirm("해상 게시글을 삭제하시겠습니까?");
+    if (checkDel) {
+      db.ref(`post/${delTar}`).remove();
+    }
+  } else {
+    alert("잘못된 접근입니다.");
+  }
+}
+
+function showPostContents() {
+  let tar = event.target.parentNode.id;
+  const pC = document.querySelector("#showPostModalContent");
+  const pL = document.querySelector("#showPostModalLabel");
+  const pTm = document.querySelector("#showPostModalTime");
+  const pA = document.querySelector("#showPostModalAuthor");
+  db.ref("post/")
+    .get()
+    .then((subs) => {
+      pC.innerHTML = subs.val()[tar].content;
+      pL.innerHTML = subs.val()[tar].title;
+      pTm.innerHTML = subs.val()[tar].updTime;
+      pA.innerHTML = subs.val()[tar].author;
+      if (subs.val()[tar].userID === uid) {
+        let dBtn = document.querySelector("#deletePostBtn");
+        dBtn.style.display = "block";
+        dBtn.addEventListener("click", () => {
+          deletePost(subs.val()[tar].userID, tar);
+          postModal.hide();
+          // loadPosts(1);
+          createPaging(1);
+        });
+      }
+    });
+  let postModal = new bootstrap.Modal(document.getElementById("showPostModal"));
+  postModal.show();
+}
+
+async function createPaging(n) {
+  const wait = await loadPosts(n);
+  let pagingN = Math.ceil(postN / 5);
+  //<ul id="postPagingList" class="pagination justify-content-center">
+  let pagingParnent = document.querySelector("#postPagingList");
+  while (pagingParnent.hasChildNodes()) {
+    pagingParnent.removeChild(pagingParnent.firstChild);
+  }
+  for (let i = 0; i < pagingN; i++) {
+    let li = document.createElement("li");
+    let btn = document.createElement("button");
+    btn.className = "btn text-secondary mx-1 btn-outline-secondary";
+    btn.innerText = i + 1;
+    btn.addEventListener("click", () => {
+      loadPosts(i + 1);
+      // createPaging();
+    });
+    li.appendChild(btn);
+    pagingParnent.appendChild(li);
+  }
+
+  // console.log("inside createpaging: ", document.querySelector("#postNum"));
+  // let postN = document.querySelector("#postNum").innerText;
+  // console.log(
+  //   "inside createpaging ",
+  //   document.querySelector("#postNum").innerText
+  // );
+}
+
+function loadPosts(page) {
+  return new Promise((resolve, reject) => {
+    db.ref("post/")
+      .get()
+      .then((subs) => {
+        let targetContents = document.querySelector("#postTable");
+        let postContents = document.querySelector("#postTable tbody");
+        targetContents.removeChild(postContents);
+        let tbody = document.createElement("tbody");
+        // 전체 length
+        let storedPosts = subs.val();
+        let len = Object.keys(storedPosts).length;
+        postN = len;
+        let postIdx = len - 5 * (page - 1);
+
+        for (let i = 0; i < 5; i++) {
+          let postKey = Object.keys(storedPosts)[postIdx - 1];
+          if (postKey === undefined) break;
+          let tableElement = ["title", "author", "updTime"];
+          let tr = document.createElement("tr");
+          let th = document.createElement("th");
+          tr.addEventListener("click", showPostContents);
+          tr.id = postKey;
+          th.innerHTML = postIdx;
+          postIdx -= 1;
+          tr.appendChild(th);
+          for (let i = 0; i < 3; i++) {
+            let td = document.createElement("td");
+            td = document.createElement("td");
+            td.innerHTML = storedPosts[postKey][tableElement[i]];
+            tr.appendChild(td);
+          }
+          tbody.appendChild(tr);
+        }
+        targetContents.appendChild(tbody);
+        console.log("load comp"); //testing
+        resolve();
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("err"); //testing
+        console.log("no posts"); //testing
+        reject();
+        return;
+      });
+  });
+}
+
+function showCreatePostModal() {
+  let postModal = new bootstrap.Modal(
+    document.getElementById("createPostModal")
+  );
+  postModal.show();
+
+  let create = document.querySelector("#btnCreatePost");
+  create.addEventListener("click", saveNewPost);
+}
+
+/////////////////////// TIPS
 function getGrad() {
   let majorType = document.querySelector("#majorType");
   let enterYear = document.querySelector("#enterYear").value;
@@ -23,14 +187,15 @@ function getGrad() {
   let _url = `https://www.skku.edu/_res/skku/etc/${year}_p7.pdf`;
   window.open(_url);
 }
+////////////////////////?????///////////
 
-// modal
+// TIPS_modal
 var myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
 let cards = document.querySelectorAll(".card");
 
-let data = new Array();
-// wifi
-data.push(`<div class="row">
+let dataTips = new Array();
+// TIPS_wifi
+dataTips.push(`<div class="row">
 <div>
   <br>
   &nbsp;kingo ID가 있다면 교내에서 SKKU 와이파이 사용이 가능합니다.
@@ -74,8 +239,8 @@ data.push(`<div class="row">
 </div>
 </div>
 `);
-// grad
-data.push(`<div class="row">
+// TIPS_grad
+dataTips.push(`<div class="row">
 <div class="col-8">
   <div class="col-auto my-1">
     <label class="mr-sm-2" for="majorType"> 전공 </label>
@@ -129,8 +294,8 @@ data.push(`<div class="row">
 </div>
 </div>
 `);
-// prev
-data.push(`<div class="row">
+// TIPS_prev
+dataTips.push(`<div class="row">
 <div>
     <div>학교에서 제공하는 여러 SW, 사이트들을 이용할 수 있습니다.
         <div>
@@ -218,9 +383,8 @@ cards.forEach((e, i) => {
 
     myModalLabel.innerHTML = title.innerText;
     myModalSubLable.innerHTML = subTitle.innerText;
-    myModalContents.innerHTML = data[i];
+    myModalContents.innerHTML = dataTips[i];
     myModal.show();
-    // console.log(myModal);
   });
 });
 
@@ -293,7 +457,7 @@ function getGrad() {
   }
 }
 
-//pervi
+// previ
 function handleTipButton() {
   let tar = event.target;
   let parent = document.querySelector("#tipContents");
