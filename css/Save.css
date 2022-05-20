@@ -21,7 +21,15 @@ body {
 #filebox{
   pointer-events: none;
 }
-#filebox label{
+#filebox .FileOff{
+  display: inline-block;
+  padding: .5em .75em;
+  background-color: #adaaa4;
+  color:rgb(255, 255, 255);
+  border: 1px solid transparent;
+  border-radius: .25em;
+}
+#filebox .FileOn{
   display: inline-block;
   padding: .5em .75em;
   background-color: #F2C759;
@@ -152,6 +160,23 @@ p{
   top:-32px;
   z-index: 5;
 }
+
+#Add{
+  background-color: rgb(118, 206, 177); 
+  color:white
+}
+#Add:hover{
+  background-color: rgb(92, 159, 136); 
+}
+#Cancel{
+  background-color: darkgray; 
+  color:white
+}
+#Cancel:hover{
+  background-color: rgb(125, 125, 125); 
+}
+
+/* 로그인 화면 */
 @keyframes Loading {
   0% { opacity: 1 }
   100% { opacity: 0 }
@@ -231,3 +256,4 @@ p{
   transform-origin: 0 0; /* see note above */
 }
 .Loading div { box-sizing: content-box; }
+/* 로그인 화면 끝 */
