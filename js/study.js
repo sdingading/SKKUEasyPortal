@@ -15,7 +15,8 @@ firebase.auth().onAuthStateChanged((user) => {
 const storage = firebase.storage();
 const db = firebase.database();
 
-///////////////timer////////////////
+///////////////timer///////////////
+
 
 let subObj=[];
 
@@ -56,9 +57,8 @@ function loadSubjects(){
 
 
 //title
-window.addEventListener("load", () => {
 
-  document.querySelectorAll('.subjectName').forEach( function(subject){
+document.querySelectorAll('.subjectName').forEach( function(subject){
 
     if(subject.classList.contains('text')){
 
@@ -67,21 +67,6 @@ window.addEventListener("load", () => {
           let input = e.target.value;
           //console.log(input); //확인용
   
-          if (e.target.classList.contains("subject1")){
-            a=1;
-          }
-  
-          else if (e.target.classList.contains("subject2")){
-            a=2;
-          }
-  
-          else if (e.target.classList.contains("subject3")){
-            a=3;
-          }
-  
-          else if (e.target.classList.contains("subject4")){
-            a=4;
-          }
   
           let subject = {
             name: input,
@@ -94,86 +79,90 @@ window.addEventListener("load", () => {
       })
     }
   })
-})
 
 function setTitle(subject){
   let subTitle = document.querySelector('.subTitle'+subject.id);
   subTitle.innerText = subject.name;
 }
 
-//timer function
-const Button = {
-    play: 0,
-    pause: 1
-}
-
-window.addEventListener("load", () => {
-    let timerPlay = null; //for saving interval
-
-    document.querySelectorAll('.playButton').forEach( function(timer){
-      timer.addEventListener("click", e=>{
-        timer.classList.toggle('pauseButton');
-        let a = 0; //for make timer id
-
-        //for getting id
-        if (e.target.classList.contains('play1')){
-          a=1;
-        }
-        else if (e.target.classList.contains('play2')){
-          a=2;
-        }  
-        else if (e.target.classList.contains('play3')){
-          a=3;
-        }
-        else if (e.target.classList.contains('play4')){
-          a=4;
-        }
-
-        //create object
-        let timeObj = {
-            id: "timer"+a,
-            button: Button.play,
-            time: 0
-        }
-
-        if (e.target.classList.contains('pauseButton')){
-          timeObj.button = Button.pause;
-          //if displayed button shape is pause shape, time goes
-          timerPlay = setInterval(timePlay, 1000, timeObj);
-        }
-
-        else{
-          //displayed button shape is play shape, time paused.
-          if (timerPlay !== null){
-            clearInterval(timerPlay);
-          }
-        }
-      })
-    });
-  });
-
-  //time goes & display it
-  function timePlay(timeObj){  
-    //timer box always starts with 00:00:00
-    timeObj.time ++;
-    let sec = timeObj.time;
-    let min = 0;
-    let hr = 0;
-
-    if (sec>=60){
-      sec=Math.floor(timeObj.time%60);
-      min+=Math.floor(timeObj.time/60);
-    }
-
-    if(min>=60){
-      min=Math.floor(timeObj.time%3600);
-      hr+=Math.floor(timeObj.time/3600);
-    }
-
-    //display
-    let timeBox = document.getElementById(timeObj.id);
-    timeBox.innerHTML = twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec);
+function check_length(area){
+  let text = area.value;
+  const max_length = 12;
+  if(text.length > max_length){
+    text = text.substr(0,max_length);
+    area.value = text;
   }
+}
+function SubjectAdd(title,time){
+  let dflex = document.createElement("div");
+  dflex.className = "d-flex mb-4";
+
+  let div = document.createElement("div");
+  div.className = "subTitle";
+  div.innerText = title;
+  dflex.appendChild(div);
+
+  let button = document.createElement("button");
+  button.type = "button";
+  button.className = "playButton";
+
+  let clocking = 0;
+  let timer = null;
+  let count = 0;
+  button.addEventListener("click",()=>{
+    if(clocking){
+      clocking= 0;
+      if(timer != null){
+        clearInterval(timer);
+      }
+      console.log(count);
+      button.className = "playButton"
+    }
+    else{
+      clocking = 1;
+      timer = setInterval(() => {
+        let sec = ++count;
+        let min = 0;
+        let hr = 0;
+
+        if (sec>=60){
+          sec=Math.floor(timeObj.time%60);
+          min+=Math.floor(timeObj.time/60);
+        }
+      
+        if(min>=60){
+          min=Math.floor(timeObj.time%3600);
+          hr+=Math.floor(timeObj.time/3600);
+        }
+      
+        //display
+        strong.innerText = twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec);
+      }, 1000);
+      button.className = "pauseButton"
+    }
+  })
+  dflex.appendChild(button);
+
+  let timediv = document.createElement("div");
+  timediv.id = "timer1";
+  timediv.className = "timeBox";
+  let strong = document.createElement("strong");
+  strong.innerText = " 00 : 00 : 00 ";
+
+  timediv.appendChild(strong);
+  dflex.appendChild(timediv);
+
+  document.querySelector(".timerSet").appendChild(dflex);
+}
+document.querySelector("#Add").addEventListener("click",()=>{
+  savedTime ={
+    sec : 0,
+    min : 0,
+    hr : 0
+  }
+  SubjectAdd(document.getElementById("text").value,savedTime);
+})
+
 
   //for representing time in 2 digits
   function twoDigit(num){
