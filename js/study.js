@@ -5,6 +5,7 @@ firebase.auth().onAuthStateChanged((user) => {
     // User is signed in, uid로 사용자 파일관리
     uid = user.uid;
     loadSubjects();
+    
     // ...
   } else {
   // User is signed out
@@ -17,73 +18,29 @@ const db = firebase.database();
 
 ///////////////timer///////////////
 
-
-let subObj=[];
-
 function saveSubject(subject){
- 
-  db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
-    subObj = Object.values(subs.val())
-    let subObj2 = subObj;
-    subObj.forEach(e => {  
-      if (subject.id === e.id){
-        subObj2 = subObj.filter((element)=> element !== e)
-      }
-    });
-    db.ref('users/'+uid+'/subjects/').remove();
-    for(let i=0; i<subObj2.length; i++){
-      db.ref('users/'+uid+'/subjects/').push(subObj2[i]);
-    }
-    db.ref('users/'+uid+'/subjects/').push(subject);
-    console.log('saved'); //testing
-  }).catch((error)=>{
-    console.log('not saved'); //testing
-    db.ref('users/'+uid+'/subjects/').push(subject);
-    return;
-  }) 
+  db.ref('users/'+uid+'/subjects/').update({
+    [subject] : 0
+  })
 }
-
+function saveTime(subject,time){
+  db.ref('users/' + uid +'/subjects/').update({
+    [subject] : time
+  })
+}
 function loadSubjects(){
   db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
-
-    subObj = Object.values(subs.val());
-    subObj.forEach(setTitle);
+    
+    subObj = subs.val();
+    Object.entries(subObj).forEach((sub)=>{
+      SubjectAdd(sub[0],sub[1]);
+    })
     //console.log('saved'); //testing
   }).catch((error)=>{
     //console.log('not saved'); //testing
     return;
   })
 };
-
-
-//title
-
-document.querySelectorAll('.subjectName').forEach( function(subject){
-
-    if(subject.classList.contains('text')){
-
-      subject.addEventListener("keydown", e=>{
-        if(e.key === 'Enter'){
-          let input = e.target.value;
-          //console.log(input); //확인용
-  
-  
-          let subject = {
-            name: input,
-            id: a
-          };
-         
-          saveSubject(subject);
-          setTitle(subject);
-        }
-      })
-    }
-  })
-
-function setTitle(subject){
-  let subTitle = document.querySelector('.subTitle'+subject.id);
-  subTitle.innerText = subject.name;
-}
 
 function check_length(area){
   let text = area.value;
@@ -108,46 +65,81 @@ function SubjectAdd(title,time){
 
   let clocking = 0;
   let timer = null;
-  let count = 0;
+  let autosave = null;
+  let count = time;
+  let curcount = 0;
   button.addEventListener("click",()=>{
     if(clocking){
       clocking= 0;
       if(timer != null){
         clearInterval(timer);
       }
-      console.log(count);
+      saveTime(title,count);
       button.className = "playButton"
     }
     else{
       clocking = 1;
+      autosave = setInterval(()=>{
+        saveTime(title,count);
+      },10000)
       timer = setInterval(() => {
         let sec = ++count;
         let min = 0;
         let hr = 0;
-
+        let cursec = ++curcount;
+        let curmin = 0;
+        let curhr = 0;
         if (sec>=60){
-          sec=Math.floor(timeObj.time%60);
-          min+=Math.floor(timeObj.time/60);
+          sec=Math.floor(curcount%60);
+          min+=Math.floor(curcount/60);
         }
-      
+        if(cursec >= 60){
+          cursec=Math.floor(curcount%60);
+          curmin+=Math.floor(curcount/60);
+        }
         if(min>=60){
-          min=Math.floor(timeObj.time%3600);
-          hr+=Math.floor(timeObj.time/3600);
+          min=Math.floor(min%60);
+          hr+=Math.floor(min/60);
+        }
+        if(curmin>=60){
+          curmin=Math.floor(curmin%60);
+          curhr+=Math.floor(curmin/60);
         }
       
         //display
+        curstrong.innerText = twoDigit(curhr) + " : " + twoDigit(curmin) + " : " + twoDigit(cursec);
         strong.innerText = twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec);
       }, 1000);
-      button.className = "pauseButton"
+      button.className = "pauseButton";
     }
   })
   dflex.appendChild(button);
+  let sec = count;
+  let min = 0;
+  let hr = 0;
+
+  if (sec>=60){
+    sec=Math.floor(count%60);
+    min+=Math.floor(count/60);
+  }
+
+  if(min>=60){
+    min=Math.floor(min%60);
+    hr+=Math.floor(min/60);
+  }
+  let curtimediv = document.createElement("div");
+  curtimediv.id = "timer";
+  curtimediv.className = "timeBox";
+  let curstrong = document.createElement("strong");
+  curstrong.innerText = "00 : 00 : 00";
+  curtimediv.appendChild(curstrong);
+  dflex.appendChild(curtimediv);
 
   let timediv = document.createElement("div");
-  timediv.id = "timer1";
+  timediv.id = "timer";
   timediv.className = "timeBox";
   let strong = document.createElement("strong");
-  strong.innerText = " 00 : 00 : 00 ";
+  strong.innerText = twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec);
 
   timediv.appendChild(strong);
   dflex.appendChild(timediv);
@@ -155,12 +147,9 @@ function SubjectAdd(title,time){
   document.querySelector(".timerSet").appendChild(dflex);
 }
 document.querySelector("#Add").addEventListener("click",()=>{
-  savedTime ={
-    sec : 0,
-    min : 0,
-    hr : 0
-  }
-  SubjectAdd(document.getElementById("text").value,savedTime);
+  let Time = 0;
+  saveSubject(document.getElementById("text").value);
+  SubjectAdd(document.getElementById("text").value,Time);
 })
 
 
