@@ -23,6 +23,7 @@ body {
   /* timer block */
   .timerTitle{
     font-size: larger;
+    color: #6F5141;
   }
 
   #titleLine{
@@ -79,7 +80,7 @@ body {
 .playButton{
   width:30px;
   height:30px;
-  margin-left:150px;
+  margin-left:100px;
   background-color: white;
   border-width:0 0 0 30px;
   margin-top: 6px;
@@ -93,7 +94,7 @@ body {
 .pauseButton{
   width:30px;
   height:30px;
-  margin-left:150px;
+  margin-left:100px;
   background-color: white;
   border-width:0 0 0 30px;
   margin-top: 6px;
@@ -110,12 +111,19 @@ body {
   color:#F9EDE1;
   font-size: larger;
 }
+#timerLineTop{
+  background-color:#6F5141;
+  width: 82%;
+  height:11px;
+  margin-inline: 10%;
+  margin-top: 3%;
+  margin-bottom:2%;
+}
 
 #timerLine{
   background-color:#6F5141;
-  width: 93%;
+  width: 95%;
   height:11px;
-  margin-inline: 4%;
   margin-top: 3%;
   margin-bottom:2%;
 }
