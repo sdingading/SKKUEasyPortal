@@ -1,6 +1,9 @@
 let uid = 0;
 let mainbookUID = 0;
 let count = 0;
+let pagecount = 0;
+let deletePath =0;
+let deletediv = 0;
 let buttonCreate = document.querySelector("#Add");
 const fileInput = document.getElementById("FileUpload");
 const storage = firebase.storage();
@@ -27,7 +30,6 @@ window.addEventListener("load",()=>{
 });
 })
 //Color Picker
-let Color = CodeMirrorColorPicker.Color;
 let bgColor = '#FFFFFF';
 let ftColor = 'black';
 let bgnode = document.querySelector(".bgcolor-picker");
@@ -45,13 +47,15 @@ let ftnode = document.querySelector(".ftcolor-picker");
   let ftpicker = new CodeMirrorColorPicker.create({
         position: 'inline',
         container: ftnode,
-        type: 'palette',
+        mode: 'edit',
+        type: 'box',
         color: 'black',
         onChange: function(color){
           ftColor = color;
           document.querySelector(".color-show").style.color = color;
         }
   });
+
 function loadBooks(){
 
   db.ref('users/'+uid+'/books/').get().then((snap)=>{
@@ -63,19 +67,18 @@ function loadBooks(){
       }
       books.forEach(addToList);
       document.querySelector("#InputBook").remove();
+      document.querySelector(".FileOff").className = "FileOn";
       document.querySelector("#filebox").style.pointerEvents = "auto";
       let mainbookindex;
        Object.values(snap.val()).find((val,i)=>{
-      if(val.type === 1)mainbookindex = i;
-      })
-        mainbookUID =Object.keys(snap.val())[mainbookindex];
-        loadPages();
+      if(val.type === 1)mainbookindex = i;})
+      mainbookUID =Object.keys(snap.val())[mainbookindex];
+      loadPages();
     }
     document.getElementById("CompleteButton").click();
   });
 }
 function loadPages(){
-
   storage.ref().child('users/' + uid + '/' + mainbookUID).listAll().then((res)=>
     res.items.forEach((itemRef)=>{
       itemRef.getDownloadURL().then((url)=>{
@@ -83,6 +86,7 @@ function loadPages(){
       })
     })
   )
+  .then(()=>document.getElementById("CompleteButton").click())
 }
 function addPage(url,Ref){
   let div = document.createElement("div");
@@ -95,23 +99,40 @@ function addPage(url,Ref){
   p.textContent = Ref.name;
   p.style="margin-left:5px;margin-bottom:0px;width:200px;height:25px;overflow:hidden;text-overflow:ellipsis; color:#6F5141;"
   div.style=" textAlign:center; background-color:#F9EDE1";
-  let icon = document.createElement("i");
-  icon.className="bi bi-x ms-auto";
-  icon.style ="cursor:pointer;"
-  icon.addEventListener("click",()=>{
-    storage.ref().child(Ref.fullPath).delete().then(div.remove());
+
+  let Deleteicon = document.createElement("i");
+  let Searchicon = document.createElement("i");
+  Deleteicon.className="bi bi-x ms-auto";
+  Searchicon.className="bi bi-search ms-auto";
+  Deleteicon.style ="cursor:pointer;"
+  Searchicon.style ="cursor:pointer;"
+  Deleteicon.addEventListener("click",()=>{
+    document.getElementById("DeleteTitle").textContent = Ref.name;
+    deletePath = Ref.fullPath;
+    deletediv = div;
+    document.getElementById("DeletePage").click();
+  })
+  Searchicon.addEventListener("click",()=>{
+    let a =document.createElement("a");
+    a.target = "_blank";
+    a.href = url;
+    a.click();
   })
   tab.appendChild(p);
-  tab.appendChild(icon);
+  tab.appendChild(Searchicon);
+  tab.appendChild(Deleteicon);
   let embed = document.createElement("embed");
   embed.style="width:250px;height:275px;";
   embed.src= url;
+  embed.alt = "이미지 없음";
   div.appendChild(tab);
   div.appendChild(embed);
   let list = document.querySelector("#list");
   list.insertBefore(div,list.firstChild);
 }
-
+document.getElementById("DeleteButton").addEventListener("click",()=>{
+  storage.ref().child(deletePath).delete().then(deletediv.remove());
+})
 function check_length(area){
   let text = area.value;
   const max_length = 15;
@@ -122,10 +143,32 @@ function check_length(area){
   document.querySelector("#color-show").innerHTML=`<p>${text}</p>`
 }
 
-fileInput.addEventListener("change",(e) =>{
+fileInput.addEventListener("input",() =>{
   const selectedFile = fileInput.files[0];
+  fileInput.value = '';
   const storageRef = storage.ref();
-  const uploadPath = storageRef.child('users/' + uid + '/' + mainbookUID +'/'+ selectedFile.name);
+  const spaceRef = storageRef.child('users/' + uid + '/' + mainbookUID);
+  let name = selectedFile.name.slice(0,-4);
+  let type = selectedFile.name.slice(-4);
+  spaceRef.listAll().then((res)=>{
+    while(1){
+      let check = false;
+      let checkname = name;
+    res.items.forEach((itemRef)=>{
+      if(pagecount) checkname = name + "-" + pagecount;
+      if(checkname + type == itemRef.name){
+        pagecount++;
+        check = true;
+      }
+    })
+    if(!check) break;
+  }
+  })
+  .then(()=>{
+    if(pagecount) name = name + "-" + pagecount;
+    pagecount = 0;
+    const uploadPath = storageRef.child('users/' + uid + '/' + mainbookUID +'/'+ name + type);
+  document.getElementById("LoadButton").click();
   const upload = uploadPath.put(selectedFile);
   upload.on('state_changed',
   //변화시 동작하는 함수
@@ -138,9 +181,11 @@ fileInput.addEventListener("change",(e) =>{
   ()=>{
     fileRef = uploadPath;
     fileRef.getDownloadURL().then((url)=>{
+      document.getElementById("CompleteButton").click();
       addPage(url,fileRef);
     })
   });
+  })
   });
 
 let buttonMainBook = document.querySelector("#mainbook");
@@ -217,6 +262,12 @@ function addToList(book){
             return val;
           }})
         db.ref('users/'+uid+'/books/'+Object.keys(snap.val())[bookindex]).remove();
+        storage.ref().child('users/'+uid +'/' + Object.keys(snap.val())[bookindex]).listAll().then((res)=>{
+          res.items.forEach((itemRef)=>{
+              itemRef.delete();
+          })
+        });
+        
       })
     })
     newBook.appendChild(icon);
@@ -234,6 +285,7 @@ function addToList(book){
     })
     container.insertBefore(newBook,container.firstChild);
   }
+  
 }
 
 buttonCreate.addEventListener("click",()=>{
@@ -241,6 +293,7 @@ buttonCreate.addEventListener("click",()=>{
   if(document.querySelector("#InputBook")){
     document.querySelector("#InputBook").remove();
     document.querySelector("#filebox").style.pointerEvents = "auto";
+    document.querySelector(".FileOff").className = "FileOn";
     initialBook = 1;
   }
   let book = {

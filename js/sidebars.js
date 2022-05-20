@@ -1,43 +1,43 @@
 var uid = 0;
+const storage = firebase.storage();
+const db = firebase.database();
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, uid로 사용자 파일관리
       uid = user.uid;
-      if(document.querySelector("#login")) document.querySelector("#login").remove();
-      if(document.querySelector("#logout")) document.querySelector("#logout").remove();
-      let li = document.createElement("li");
-      li.id= "logout"
-      li.className ="dropdown-item"
-      li.innerText = "Sign out";
-      li.addEventListener("click",()=>{
-        firebase.auth().signOut();
-      });
-      document.querySelector("#dropdown").appendChild(li);
+      document.getElementById("logout").style.display = "block";
+      document.getElementById("login").style.display = "none";
+
+      document.getElementById("divider").style.display = "block";
+      document.getElementById("Profiles").style.display = "block";
+      storage.ref().child('users/'+ uid + '/profile').listAll().then((res)=>{
+        res.items.forEach((itemRef)=>{
+          itemRef.getDownloadURL().then((url)=>{
+            document.getElementById("profileimg").src = url;
+            document.getElementById("settingimg").src = url;
+          })
+        })
+      })
+      db.ref('users/'+ uid).get().then((snap)=>{
+        document.getElementById("User").textContent = snap.val().name;
+        document.querySelector("#text").value = snap.val().name;
+      })
       // ...
     } else {
       // User is signed out
-      if(document.querySelector("#login")) document.querySelector("#login").remove();
-      if(document.querySelector("#logout"))document.querySelector("#logout").remove();
-      let li = document.createElement("li");
-      li.id= "login"
-      li.className ="dropdown-item"
-      li.innerText = "Sign in";
-      li.addEventListener("click",()=>{
-      changeIframe("page/login.html");
-      })
-      document.querySelector("#dropdown").appendChild(li);
-        
+      document.getElementById("login").style.display = "block";        
+      document.getElementById("logout").style.display = "none";
     }
   });
-
-/* global bootstrap: false */
-(function () {
-  'use strict'
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-    new bootstrap.Tooltip(tooltipTriggerEl)
-  })
-})()
+document.querySelector("#logout").addEventListener("click",()=>{
+    firebase.auth().signOut();
+    document.getElementById("settingimg").src = "images/unknownuser.jpg";
+    document.getElementById("profileimg").src = "images/unknownuser.jpg";
+    document.getElementById("Profiles").style.display = "none";
+    document.getElementById("divider").style.display = "none";
+    document.getElementById("User").textContent = "user";
+    document.querySelector("#text").value = "user";
+});
 
 function changeIframe(url){
   document.getElementById("content").src=url;
@@ -45,3 +45,64 @@ function changeIframe(url){
 
 
 let logout = document.querySelector("#logout");
+function check_length(area){
+  let text = area.value;
+  const max_length = 7;
+  if(text.length > max_length){
+    text = text.substr(0,max_length);
+    area.value = text;
+  }
+}
+var file = 0;
+var fileInput = document.getElementById("FileUpload");
+fileInput.addEventListener("input",() =>{
+  var selectedFile = fileInput.files[0];
+  file = selectedFile;
+  SettingImage(selectedFile);
+ 
+});
+
+function SettingImage(File){
+  var img = new FileReader();
+  img.onload = function (e){
+    document.getElementById("settingimg").src = e.target.result;
+  };
+  img.readAsDataURL(File);
+}
+document.querySelector("#Cancel").addEventListener("click",()=>{
+  document.querySelector("#text").value = document.getElementById("User").textContent;
+  document.getElementById("settingimg").src = document.getElementById("profileimg").src;
+  fileInput.value = '';
+})
+  document.querySelector("#Add").addEventListener("click",()=>{
+    document.getElementById("profileimg").src = document.getElementById("settingimg").src;
+    db.ref('users/'+uid).update(
+      {name: document.querySelector("#text").value})
+      .then(()=>{document.getElementById("User").textContent = document.querySelector("#text").value;})
+    if(fileInput.value){
+    const storageRef = storage.ref();
+      storageRef.child('users/'+uid + '/profile').listAll().then((res)=>{
+        res.items.forEach((itemRef)=>{
+          itemRef.delete();
+        })
+      })
+      .then(()=>{
+        const uploadPath = storageRef.child('users/' + uid + '/profile' +'/'+ file.name);
+        const upload = uploadPath.put(file);
+        upload.on('state_changed',
+        //변화시 동작하는 함수
+        null,
+        //에러시 동작하는 함수
+        (error) =>{
+          console.error(error);
+        },
+        //성공시 동작하는 함수
+        ()=>{
+          fileRef = uploadPath;
+          fileRef.getDownloadURL().then(()=>{
+            fileInput.value = '';
+          })
+        });
+      })
+    }
+  })

@@ -19,8 +19,8 @@
         <i class="bi bi-plus fs-3 position-absolute top-50 start-50 translate-middle"></i>
       </div>
       <div id="filebox" class="ms-auto me-5">
-        <label for="FileUpload"><i class="bi bi-download me-2"></i>파일 추가</label>
-        <input type = "file" id = "FileUpload" style = "width:300px;height:40px;">
+        <label class="FileOff" for="FileUpload"><i class="bi bi-download me-2"></i>파일 추가</label>
+        <input type = "file" id = "FileUpload" accept=".jpg, .png, .pdf, .txt">
       </div>
       <div id = "list">
       </div>
@@ -52,8 +52,31 @@
       </div>
     </div>
     <!---------------------->
+    <!------삭제화면 -------->
+    <button type="button" id="DeletePage" style="display:none" data-bs-toggle="modal" data-bs-target="#Delete"></button>
+    
+    <div class="modal" id="Delete" z-index="9000" style="pointer-events: none;">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header m-3" style="height:20px">
+              <p id="DeleteTitle">삭제</p>
+          </div>
+          <div class="modal-body m-0" style="height:50px">
+            <div style="position:absolute; left:50%;top:50%; transform:translate(-50%,-50%)">
+            <p>이 파일을 삭제 하시겠습니까?</p>
+            </div>
+
+          </div>            
+          <div class="modal-footer" style="border:0px">
+            <button type="button" id="DeleteButton" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---------------------->
     <div class="modal fade" id="BookMake" tabindex="-1" aria-labelledby="BookMakeLabel" aria-hidden="true" >
-      <div class="modal-dialog modal-dialog-centered" style="max-width:540px">
+      <div class="modal-dialog modal-dialog-centered" style="max-width:800px">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="BookMakeLabel">책 만들기</h5>
@@ -64,6 +87,8 @@
               <div class="col">
                 <div class="color-show" id="color-show"></div>
                 <input type="text" class="letter ms-2 mt-3 mb-3" id="text" placeholder="여기에 제목을 입력해주세요" onfocus="placeholder=''" onblur="placeholder='여기에 제목을 입력해주세요'" onkeydown="check_length(this)" onkeyup="check_length(this)"></input>
+              </div>
+              <div class="col">
                 <div class="ftcolor-picker"></div>
                 <p class ="letterColor" style="color:#6F5141; font-size: 20px">글씨 색상</p>
               </div>
@@ -73,9 +98,10 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-            <button type="button" id="Add" class="btn btn-primary" data-bs-dismiss="modal">만들기</button>
+          <div class="modal-footer" style="border:0px">
+            <button type="button" id="Cancel"class="btn"data-bs-dismiss="modal">취소</button>
+            <button type="button" id="Add" class="btn" data-bs-dismiss="modal">만들기</button>
+          </div>
           </div>
         </div>
       </div>
@@ -101,6 +127,7 @@
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/codemirror-colorpicker@1.9.35/dist/codemirror-colorpicker.min.js" ></script>
     <script src="../js/save.js"></script>
+    <script src="../js/settings.js"></script>
     <script>
     </script>
   </body>

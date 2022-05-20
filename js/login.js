@@ -8,7 +8,8 @@ const signupEmail = (email,password) =>{
       uid = firebase.auth().currentUser.uid;
       db.ref('users/'+uid).set({
         email: email,
-        password: password
+        password: password,
+        name: "user"
       }).then(()=>location.href="../page/home.html")
       })
     .catch((e)=>{
