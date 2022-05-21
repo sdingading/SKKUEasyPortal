@@ -33,14 +33,16 @@ function saveTime(subject,time){
 }
 function loadSubjects(){
   db.ref('users/'+uid+'/subjects/').get().then((subs)=>{
-    
-    subObj = subs.val();
-    Object.entries(subObj).forEach((sub)=>{
-      SubjectAdd(sub[0],sub[1]);
-    })
+    if(subs.exists()){
+      subObj = subs.val();
+      Object.entries(subObj).forEach((sub)=>{
+        SubjectAdd(sub[0],sub[1]);
+      })
+    }
     document.getElementById("CompleteButton").click();
     //console.log('saved'); //testing
   }).catch((error)=>{
+    console.log(error);
     //console.log('not saved'); //testing
     return;
   })
