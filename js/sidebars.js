@@ -1,7 +1,7 @@
 var uid = 0;
 const storage = firebase.storage();
 const db = firebase.database();
-  firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, uid로 사용자 파일관리
       uid = user.uid;
@@ -31,6 +31,8 @@ const db = firebase.database();
   });
 document.querySelector("#logout").addEventListener("click",()=>{
     firebase.auth().signOut();
+    uid = 0;
+    document.getElementById("content").src="page/login.html";
     document.getElementById("settingimg").src = "images/unknownuser.jpg";
     document.getElementById("profileimg").src = "images/unknownuser.jpg";
     document.getElementById("Profiles").style.display = "none";
@@ -40,7 +42,8 @@ document.querySelector("#logout").addEventListener("click",()=>{
 });
 
 function changeIframe(url){
-  document.getElementById("content").src=url;
+  if(uid || url =="page/home.html") document.getElementById("content").src=url;
+  else document.getElementById("content").src = "page/login.html"
 }
 
 

@@ -1,18 +1,21 @@
 //user login
 var uid = 0;
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, uid로 사용자 파일관리
-    uid = user.uid;
-    loadSubjects();
-    
-    // ...
-  } else {
-  // User is signed out
-  location.href = "login.html";
-  }
-}); 
 
+
+window.addEventListener("load",()=>{
+  document.getElementById("LoadButton").click();
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, uid로 사용자 파일관리
+      uid = user.uid;
+      loadSubjects();
+      
+      // ...
+    }
+  }); 
+})
+// 로딩 화면 호출 document.getElementById("LoadButton").click();
+// 로딩 화면 삭제 document.getElementById("CompleteButton").click();
 const storage = firebase.storage();
 const db = firebase.database();
 
@@ -35,6 +38,7 @@ function loadSubjects(){
     Object.entries(subObj).forEach((sub)=>{
       SubjectAdd(sub[0],sub[1]);
     })
+    document.getElementById("CompleteButton").click();
     //console.log('saved'); //testing
   }).catch((error)=>{
     //console.log('not saved'); //testing
@@ -54,24 +58,22 @@ function SubjectAdd(title,time){
 
   let dflex = document.createElement("div");
   dflex.className = "d-flex mb-4";
-
-  let div = document.createElement("div");
-  div.className = "subTitle";
-  div.innerText = title;
   
   //delete Button 추가
-  let deleteButton = document.createElement("div");
-  deleteButton.className = "deleteButton";
-  deleteButton.innerHTML ='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#6F5141" class="bi bi-x-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/></svg>'
-  dflex.append(deleteButton);
+  let deleteButton = document.createElement("a");
+  deleteButton.id = "deleteButton"
+  deleteButton.className = "bi bi-x-square-fill"
+  deleteButton.style = "font-size:32px; color:#6F5141; cursor:pointer";
   
-   //refresh Button
-   let refreshButton = document.createElement("div");
-   refreshButton.className = "deleteButton";
-   refreshButton.innerHTML ='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#6F5141" class="bi bi-eraser-fill" viewBox="0 0 16 16"><path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/></svg>'
-   dflex.append(refreshButton);
+  //refresh Button
+  let refreshButton = document.createElement("div");
+  refreshButton.id = "refreshButton";
+  refreshButton.className = "bi bi-eraser-fill ms-2";
+  refreshButton.style = "font-size:32px; color:#6F5141; cursor:pointer";
 
-  dflex.appendChild(div); //과목이름
+  let div = document.createElement("div");
+  div.className = "subTitle mt-1";
+  div.innerText = title;
 
   let button = document.createElement("button");
   button.type = "button";
@@ -84,11 +86,16 @@ function SubjectAdd(title,time){
   let curcount = 0;
 
   deleteButton.addEventListener("click",()=>{
-    console.log('과목지우기');
+    dflex.remove();
+    db.ref('users/' + uid +'/subjects/' + title).remove();
   })
 
   refreshButton.addEventListener("click", ()=>{
-    console.log("누적시간0으로돌리기");
+    count = 0;
+    curcount = 0;
+    timediv.innerHTML = "<strong>00 : 00 : 00</strong>";
+    curtimediv.innerHTML = "<strong> 00 : 00 : 00</strong>";
+    saveTime(title,count);
   })
 
   button.addEventListener("click",()=>{
@@ -96,6 +103,9 @@ function SubjectAdd(title,time){
       clocking= 0;
       if(timer != null){
         clearInterval(timer);
+      }
+      if(autosave != null){
+        clearInterval(autosave);
       }
       saveTime(title,count);
       button.className = "playButton"
@@ -113,31 +123,30 @@ function SubjectAdd(title,time){
         let curmin = 0;
         let curhr = 0;
         if (sec>=60){
-          sec=Math.floor(curcount%60);
-          min+=Math.floor(curcount/60);
+          sec=Math.floor(count%60);
+          min+=Math.floor(count/60);
         }
         if(cursec >= 60){
           cursec=Math.floor(curcount%60);
           curmin+=Math.floor(curcount/60);
         }
         if(min>=60){
-          min=Math.floor(min%60);
-          hr+=Math.floor(min/60);
+          min=Math.floor(count%3600);
+          hr+=Math.floor(count/3600);
         }
         if(curmin>=60){
-          curmin=Math.floor(curmin%60);
-          curhr+=Math.floor(curmin/60);
+          curmin=Math.floor(curcount%3600);
+          curhr+=Math.floor(curcount/3600);
         }
       
         //display
-        curstrong.innerText = twoDigit(curhr) + " : " + twoDigit(curmin) + " : " + twoDigit(cursec);
-        strong.innerText = twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec);
+        curtimediv.innerText = twoDigit(curhr) + " : " + twoDigit(curmin) + " : " + twoDigit(cursec);
+        timediv.innerHTML = "<strong>" + twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec) + "</strong>";
       }, 1000);
       button.className = "pauseButton";
     }
 
   })
-  dflex.appendChild(button);
   let sec = count;
   let min = 0;
   let hr = 0;
@@ -154,20 +163,14 @@ function SubjectAdd(title,time){
   let curtimediv = document.createElement("div");
   curtimediv.id = "timer";
   curtimediv.className = "timeBox";
-  let curstrong = document.createElement("strong");
-  curstrong.innerText = "00 : 00 : 00";
-  curtimediv.appendChild(curstrong);
-  dflex.appendChild(curtimediv);
+  curtimediv.innerHTML = "<strong>00 : 00 : 00</strong>";
 
   let timediv = document.createElement("div");
   timediv.id = "timer";
   timediv.className = "timeBox";
-  let strong = document.createElement("strong");
-  strong.innerText = twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec);
+  timediv.innerHTML = "<strong>" + twoDigit(hr) + " : " + twoDigit(min) + " : " + twoDigit(sec) + "</strong>";
 
-  timediv.appendChild(strong);
-  dflex.appendChild(timediv);
-
+  dflex.append(deleteButton,div,button,curtimediv,timediv,refreshButton);
   document.querySelector(".timerSet").appendChild(dflex);
 }
 document.querySelector("#Add").addEventListener("click",()=>{
