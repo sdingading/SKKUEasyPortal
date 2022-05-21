@@ -153,9 +153,7 @@ function loadPosts(page) {
             let td = document.createElement("td");
             td = document.createElement("td");
             if (i === 1 && storedPosts[postKey].userID === uid) {
-              td.innerHTML = `${
-                storedPosts[postKey][tableElement[i]]
-              } <span style="color:blue">(me)</span>`;
+              td.innerHTML = `${storedPosts[postKey][tableElement[i]]} ✓ `;
             } else {
               td.innerHTML = storedPosts[postKey][tableElement[i]];
             }
