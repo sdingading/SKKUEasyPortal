@@ -1,7 +1,6 @@
 let uid = 0;
 let mainbookUID = 0;
 let count = 0;
-let pagecount = 0;
 let deletePath =0;
 let deletediv = 0;
 let buttonCreate = document.querySelector("#Add");
@@ -146,6 +145,7 @@ fileInput.addEventListener("input",() =>{
   const spaceRef = storageRef.child('users/' + uid + '/' + mainbookUID);
   let name = selectedFile.name.slice(0,-4);
   let type = selectedFile.name.slice(-4);
+  let pagecount = 0;
   spaceRef.listAll().then((res)=>{
     while(1){
       let check = false;
@@ -171,7 +171,7 @@ fileInput.addEventListener("input",() =>{
   null,
   //에러시 동작하는 함수
   (error) =>{
-    console.error(error);
+    //console.error(error);
   },
   //성공시 동작하는 함수
   ()=>{

@@ -161,18 +161,18 @@ p{
   z-index: 5;
 }
 
-#Add{
+.AddButton{
   background-color: rgb(118, 206, 177); 
   color:white
 }
-#Add:hover{
+.AddButton:hover{
   background-color: rgb(92, 159, 136); 
 }
-#Cancel{
+.CancelButton{
   background-color: darkgray; 
   color:white
 }
-#Cancel:hover{
+.CancelButton:hover{
   background-color: rgb(125, 125, 125); 
 }
 

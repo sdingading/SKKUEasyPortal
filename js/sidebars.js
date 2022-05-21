@@ -1,10 +1,12 @@
 var uid = 0;
+let currenturl = "page/home.html";
 const storage = firebase.storage();
 const db = firebase.database();
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, uid로 사용자 파일관리
       uid = user.uid;
+      changeIframe(currenturl);
       document.getElementById("logout").style.display = "block";
       document.getElementById("login").style.display = "none";
 
@@ -42,8 +44,10 @@ document.querySelector("#logout").addEventListener("click",()=>{
 });
 
 function changeIframe(url){
-  if(uid || url =="page/home.html") document.getElementById("content").src=url;
+  if(uid || url =="page/home.html")
+    document.getElementById("content").src=url;
   else document.getElementById("content").src = "page/login.html"
+  currenturl = url;
 }
 
 

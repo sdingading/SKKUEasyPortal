@@ -9,7 +9,7 @@ window.addEventListener("load",()=>{
       // User is signed in, uid로 사용자 파일관리
       uid = user.uid;
       loadSubjects();
-      
+      loadDday();
       // ...
     }
   }); 
@@ -41,10 +41,6 @@ function loadSubjects(){
     }
     document.getElementById("CompleteButton").click();
     //console.log('saved'); //testing
-  }).catch((error)=>{
-    console.log(error);
-    //console.log('not saved'); //testing
-    return;
   })
 };
 
@@ -64,14 +60,14 @@ function SubjectAdd(title,time){
   //delete Button 추가
   let deleteButton = document.createElement("a");
   deleteButton.id = "deleteButton"
-  deleteButton.className = "bi bi-x-square-fill"
-  deleteButton.style = "font-size:32px; color:#6F5141; cursor:pointer";
+  deleteButton.className = "bi bi-x-square-fill clickButton"
+  deleteButton.style = "font-size:32px; cursor:pointer";
   
   //refresh Button
   let refreshButton = document.createElement("div");
   refreshButton.id = "refreshButton";
-  refreshButton.className = "bi bi-eraser-fill ms-2";
-  refreshButton.style = "font-size:32px; color:#6F5141; cursor:pointer";
+  refreshButton.className = "bi bi-eraser-fill ms-2 clickButton";
+  refreshButton.style = "font-size:32px; cursor:pointer";
 
   let div = document.createElement("div");
   div.className = "subTitle mt-1";
@@ -175,13 +171,127 @@ function SubjectAdd(title,time){
   dflex.append(deleteButton,div,button,curtimediv,timediv,refreshButton);
   document.querySelector(".timerSet").appendChild(dflex);
 }
-document.querySelector("#Add").addEventListener("click",()=>{
+document.querySelector("#S_add").addEventListener("click",()=>{
+  document.getElementById("Subjecttext").value = '';
+})
+document.querySelector("#SubjectAdd").addEventListener("click",()=>{
   let Time = 0;
-  saveSubject(document.getElementById("text").value);
-  SubjectAdd(document.getElementById("text").value,Time);
+  let title = document.getElementById("Subjecttext").value;
+  if(title == '') title = "null";
+  let count = 0;
+  db.ref('users/' + uid + '/subjects/').get().then((subjects)=>{
+    if(subjects.exists()){
+      while(1){
+        let check = false;
+        let checkname = title;
+        Object.keys(subjects.val()).forEach((subject)=>{
+        if(count) checkname = title + "-" + count;
+        if(checkname == subject){
+          count++;
+          check = true;
+        }
+      })
+        if(!check) break;
+      }
+    }
+  }).then(()=>{
+    if(count) title = title + "-" + count;
+    count = 0;
+    saveSubject(title);
+    SubjectAdd(title,Time);
+  })
 })
 
-
+document.querySelector("#DdayAdd").addEventListener("click",()=>{
+  let event = document.getElementById("Ddaytext").value;
+  if(event =='') event = "null";
+  let count = 0;
+  db.ref('users/' + uid + '/Ddays').get().then((ddays)=>{
+    if(ddays.exists()){
+      while(1){
+        let check = false;
+        let checkname = event;
+        Object.keys(ddays.val()).forEach((dday)=>{
+        if(count) checkname = event + "-" + count;
+        if(checkname == dday){
+          count++;
+          check = true;
+        }
+      })
+      if(!check) break;
+      }
+    }
+  }).then(()=>{
+    if(count) event = event + "-" + count;
+    count = 0;
+    let Startdate = document.getElementById("Startdate").value.split("-");
+    Startdate = calDday(Startdate[0],Startdate[1],Startdate[2]);
+    let Enddate = document.getElementById("Enddate").value.split("-");
+    Enddate = calDday(Enddate[0],Enddate[1],Enddate[2]);
+    saveDday(event,Startdate,Enddate);
+    DdayAdd(event,Startdate,Enddate);
+  })
+})
+function loadDday(){
+  db.ref('users/' + uid + '/Ddays/').get().then((Ddays)=>{
+    if(Ddays.exists()){
+      DdaysObj = Ddays.val();
+      Object.entries(DdaysObj).forEach((Dday)=>{
+        DdayAdd(Dday[0],Dday[1].starttime,Dday[1].endtime);
+      })
+    }
+  })
+}
+function saveDday(title,starttime,endtime){
+  document.getElementById("LoadButton").click();
+  db.ref('users/' + uid +'/Ddays/').update({
+    [title] : {starttime, endtime}
+  })
+  .then(document.getElementById("CompleteButton").click())
+}
+function DdayAdd(event,Startdate,Enddate){
+  let tr = document.createElement("tr");
+  let Event = document.createElement("td");
+  Event.innerText = event;
+  let startday = document.createElement("td");
+  if(Startdate) startday.innerText = "D"+Startdate+" days"; 
+  else startday.innerText = "--";
+  let end = document.createElement("td");
+  end.className = "position-relative";
+  let endday = document.createElement("p");
+  endday.className = "position-absolute";
+  let deleteDate = document.createElement("i");
+  deleteDate.className ="bi bi-x position-absolute";
+  deleteDate.style = "font-size:15pt; top:5px; right:-25px; cursor:pointer";
+  deleteDate.addEventListener("click",()=>{
+    db.ref('users/' + uid + '/Ddays/' + event).remove();
+    tr.remove();
+  })
+  if(Enddate) endday.innerText = "D"+Enddate+" days";
+  else endday.innerText = "--";
+  end.append(endday);
+  end.append(deleteDate);
+  
+  tr.append(Event,startday,end);
+  document.querySelector("#Ddaybody").append(tr);
+}
+document.querySelector("#Startdate").addEventListener("change",(e)=>{
+  let tomorrow = new Date();
+  tomorrow = e.target.valueAsDate;
+  tomorrow.setDate(tomorrow.getDate()+1);
+  document.querySelector("#Enddate").valueAsDate = tomorrow;
+  document.querySelector('#Enddate').setAttribute("min",tomorrow.toISOString().split("T")[0]);
+})
+document.querySelector("#D_add").addEventListener("click",()=>{
+  let date = new Date();
+  let today = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  let nextday = new Date(date.getTime() - date.getTimezoneOffset() * 60000 + 86400000);
+  document.querySelector("#Ddaytext").value = '';
+  document.querySelector("#Startdate").valueAsDate = today;
+  document.querySelector("#Enddate").valueAsDate = nextday;
+  document.querySelector('#Startdate').setAttribute("min",today.toISOString().split("T")[0]);
+  document.querySelector('#Enddate').setAttribute("min",nextday.toISOString().split("T")[0]);
+})
   //for representing time in 2 digits
   function twoDigit(num){
 
@@ -205,37 +315,3 @@ document.querySelector("#Add").addEventListener("click",()=>{
     else
       return dDay;
   }
-
-  //display d-days
-  let finalStart = document.querySelector('#finalStart');
-  finalStart.innerText = "D"+calDday(2022,5,30)+" days";
-
-  let finalEnd = document.querySelector('#finalEnd');
-  finalEnd.innerText = "D"+calDday(2022,6,3)+" days";
-
-  let semesterEndStart = document.querySelector('#semesterEndStart');
-  semesterEndStart.innerText = "D"+calDday(2022,6,5)+" days";
-
-  let summerStart = document.querySelector('#summerStart');
-  summerStart.innerText = "D"+calDday(2022,6,7)+" days";
-
-  let summerEnd = document.querySelector('#summerEnd');
-  summerEnd.innerText = "D"+calDday(2022,6,23)+" days";
-
-  let scoreStart = document.querySelector('#scoreStart');
-  scoreStart.innerText = "D"+calDday(2022,6,10)+" days";
-
-  let scoreEnd = document.querySelector('#scoreEnd');
-  scoreEnd.innerText = "D"+calDday(2022,6,15)+" days";
-
-  let confirmStart = document.querySelector('#confirmStart');
-  confirmStart.innerText = "D"+calDday(2022,6,20)+" days";
-
-  let registerStart = document.querySelector('#registerStart');
-  registerStart.innerText = "D"+calDday(2022,8,16)+" days";
-
-  let registerEnd = document.querySelector('#registerEnd');
-  registerEnd.innerText = "D"+calDday(2022,8,22)+" days";
-
-  let secondSemester = document.querySelector('#secondSemester');
-  secondSemester.innerText = "D"+calDday(2022,8,29)+" days";

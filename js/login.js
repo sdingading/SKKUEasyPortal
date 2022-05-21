@@ -10,7 +10,7 @@ const signupEmail = (email,password) =>{
         email: email,
         password: password,
         name: "user"
-      }).then(()=>location.href="../page/home.html")
+      })
       })
     .catch((e)=>{
       if(e.code === 'auth/email-already-in-use')
@@ -31,9 +31,7 @@ buttons.addEventListener('click', (e) => {
     email = document.querySelector("#inputEmail2");
     password = document.querySelector("#inputPassword2")
     if (e.target.id === 'signin') {
-      loginEmail(email.value, password.value).then(() => {
-        location.href="../page/home.html";
-      })
+      loginEmail(email.value, password.value)
       .catch((e)=>{
         if(e.code === 'auth/invalid-email')
         login_area.innerHTML ="이메일 형식이 잘못되었습니다.";

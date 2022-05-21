@@ -126,7 +126,7 @@
       aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header"  style="background-color:#6F5141; font-size:bold; color:white">
             <h2 class="modal-title" id="createPostModalLabel">글 작성</h2>
             <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close">
               <!-- <span aria-hidden="true">&times;</span> -->
@@ -144,11 +144,11 @@
               </tr>
               <tr>
                 <td>내용</td>
-                <td><textarea name="" class="form-control" id="postContent" cols="30" rows="10"></textarea></td>
+                <td><textarea name="" class="form-control" id="postContent" style="resize:none;"cols="30" rows="10"></textarea></td>
               </tr>
             </table>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer" style="border:0px">
             <button id="btnCreatePost" class="btn btn-success close" data-bs-dismiss="modal">작성</button>
           </div>
         </div>
@@ -159,7 +159,7 @@
       aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header"  style="background-color:#6F5141; font-size:bold; color:white">
             <h2 class="modal-title" id="showPostModalLabel">제목</h2>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
               <!-- <span aria-hidden="true">&times;</span> -->
@@ -173,7 +173,7 @@
             </div>
             <p id="showPostModalContent"> 여기에 contents</p>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer" style="border:0px">
             <button id="deletePostBtn" class="btn btn-danger" style="display:none" onclick="">삭제</button>
           </div>
         </div>
