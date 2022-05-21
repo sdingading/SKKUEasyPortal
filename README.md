@@ -20,7 +20,7 @@
 
 링크 : https://dkscksals12.github.io/SKKUEasyPortal/
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660175-046749e1-2aac-4f74-970d-5bbbe6e4a008.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660175-046749e1-2aac-4f74-970d-5bbbe6e4a008.png">
 
 
 # 기능 엿보기
@@ -28,19 +28,19 @@
 
 ## - 📓회원가입
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660207-56537163-291e-4419-87fa-643fa32f4063.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660207-56537163-291e-4419-87fa-643fa32f4063.png">
 처음 회원가입 페이지에서 아이디, 비밀번호를 설정한 뒤 sign up을 하시면 회원가입을 할 수 있습니다.
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660223-04ecf4de-5e6f-4bf9-9ab6-b35d3757678e.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660223-04ecf4de-5e6f-4bf9-9ab6-b35d3757678e.png">
 좌측 하단의 유저를 클릭하시면 로그아웃 및 프로필 메뉴가 있습니다.
 프로필 메뉴에서는 사용자 이름과 프로필 사진을 설정하실 수 있습니다.
 
 ## - 📗궁금해
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660240-feb66d6c-24ab-4e83-a6af-abe9e34679a6.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660240-feb66d6c-24ab-4e83-a6af-abe9e34679a6.png">
 
 ### 1. 자유 게시판
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660262-a1d46a51-0e87-457d-b87c-55fee93b75d3.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660262-a1d46a51-0e87-457d-b87c-55fee93b75d3.png">
 글쓰기 버튼을 클릭하면 새 글을 작성할 수 있습니다.
 
 이곳에 쓰인 글은 사용자 모두가 열람할 수 있으며, 본인이 쓴 게시글에는 체크 표시가 글쓴이 옆에 표시됩니다.
@@ -49,18 +49,18 @@
 
 ### 2. 정보 페이지
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660309-4e93c2f2-8cab-429e-befe-eca43d8ce80d.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660309-4e93c2f2-8cab-429e-befe-eca43d8ce80d.png">
 교내 WIFI 사용법, 졸업요건, 누려라 성대생, 캠퍼스맵의 네가지 메뉴가 지원됩니다.
 
 위의 예시는 졸업요건 메뉴이고, 자신에게 해당하는 정보를 선택하면 자신의 조건에 맞는 졸업요건을 확인하실 수 있습니다.
 
 ## - 📕공부해
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660334-02939d1c-3cb4-476d-ad81-c1fae168c641.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660334-02939d1c-3cb4-476d-ad81-c1fae168c641.png">
 
 ### 1. 타이머 
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660341-40757afc-72b9-46ce-8b96-90fe548a6034.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660341-40757afc-72b9-46ce-8b96-90fe548a6034.png">
 타이머 우측 상단의 + 버튼을 누른뒤, text 창에 과목 이름을 넣으면, 과목 이름이 설정된 타이머가 추가됩니다. 
 
 플레이버튼을 누르면 시간이 가고 다시 일시정지를 누르면 시간이 멈추게 됩니다.
@@ -91,7 +91,7 @@
 
 정사각형 모양은 한권의 책과 같은 역할을 합니다.
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660354-11357488-22d0-4289-ad9f-be00dc3ec9c2.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660354-11357488-22d0-4289-ad9f-be00dc3ec9c2.png">
 
 기본 폴더를 누르면 + 모양 버튼을 눌러 새로운 책을 추가할 수 있습니다.
 
@@ -101,7 +101,7 @@
 
 새로운 책이 생성되어 클릭해서 들어가게 되면, 해당 페이지로 이동하게 됩니다.
 
-<img width="80%" src="https://user-images.githubusercontent.com/80513243/169660364-a04b3202-2326-4e5f-8849-4ebf29e8ec9e.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660364-a04b3202-2326-4e5f-8849-4ebf29e8ec9e.png">
 
 책 내부에는 파일추가 버튼을 통해 원하는 파일들을 간단히 저장할 수 있습니다.
 
@@ -110,7 +110,14 @@
 🙋‍♀️주의! 페이지에 추가할 수 있는 파일은 .pdf .jpg .png .txt 확장자의 파일만 지원합니다.
 
 
+# How To Contribute
+
+이 [레포지토리](https://github.com/dkscksals12/SKKUEasyPortal)를 fork 해 주세요.
+수정한 내용을 pull request 로 보내주세요.
+
+
 # 저작권 라이선스
 
 MIT License
 Copyright (c) 2022 Chan
+Licensed under the [MIT](https://github.com/microsoft/vscode/blob/main/LICENSE.txt) license.
