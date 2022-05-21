@@ -152,7 +152,13 @@ function loadPosts(page) {
           for (let i = 0; i < 3; i++) {
             let td = document.createElement("td");
             td = document.createElement("td");
-            td.innerHTML = storedPosts[postKey][tableElement[i]];
+            if (i === 1 && storedPosts[postKey].userID === uid) {
+              td.innerHTML = `${
+                storedPosts[postKey][tableElement[i]]
+              } <span style="color:blue">(me)</span>`;
+            } else {
+              td.innerHTML = storedPosts[postKey][tableElement[i]];
+            }
             tr.appendChild(td);
           }
           tbody.appendChild(tr);
