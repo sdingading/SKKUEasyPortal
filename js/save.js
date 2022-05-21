@@ -22,12 +22,8 @@ window.addEventListener("load",()=>{
       uid = user.uid;
       loadBooks();
       // ...
-    } else {
-      // User is signed out
-      location.href = "login.html";
     }
-    
-});
+  });
 })
 //Color Picker
 let bgColor = '#FFFFFF';

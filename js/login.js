@@ -35,10 +35,12 @@ buttons.addEventListener('click', (e) => {
         location.href="../page/home.html";
       })
       .catch((e)=>{
+        if(e.code === 'auth/invalid-email')
+        login_area.innerHTML ="이메일 형식이 잘못되었습니다.";
         if(e.code === 'auth/wrong-password')
-        login_area.innerHTML ="비밀번호가 틀렸습니다."
+        login_area.innerHTML ="비밀번호가 틀렸습니다.";
         if(e.code === 'auth/user-not-found')
-        login_area.innerHTML ="아이디가 존재하지 않습니다."
+        login_area.innerHTML ="아이디가 존재하지 않습니다.";
       });
     } else if (e.target.id === 'signup') {
       signupEmail(email.value, password.value)

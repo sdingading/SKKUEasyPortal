@@ -4,18 +4,18 @@ const storage = firebase.storage();
 const db = firebase.database();
 let postN = 0;
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, uid로 사용자 파일관리
-    uid = user.uid;
-    // loadPosts(1);
-    createPaging(1);
-    // ...
-  } else {
-    // User is signed out
-    location.href = "login.html";
-  }
-});
+window.addEventListener("load",()=>{
+  document.getElementById("LoadButton").click();
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, uid로 사용자 파일관리
+      uid = user.uid;
+      // loadPosts(1);
+      createPaging(1);
+      // ...
+    }
+  });
+})
 
 // Post
 function saveNewPost() {
@@ -47,7 +47,6 @@ function saveNewPost() {
       createPaging(1);
     })
     .catch((error) => {
-      console.log("not saved"); //testing
       return;
     });
 }
@@ -121,6 +120,7 @@ async function createPaging(n) {
   //   "inside createpaging ",
   //   document.querySelector("#postNum").innerText
   // );
+  document.getElementById("CompleteButton").click();
 }
 
 function loadPosts(page) {
@@ -162,13 +162,9 @@ function loadPosts(page) {
           tbody.appendChild(tr);
         }
         targetContents.appendChild(tbody);
-        console.log("load comp"); //testing
         resolve();
       })
       .catch((error) => {
-        console.log(error);
-        console.log("err"); //testing
-        console.log("no posts"); //testing
         reject();
         return;
       });
@@ -377,11 +373,9 @@ cards.forEach((e, i) => {
 
 function majTypeChange() {
   if (event.target.value === "major") {
-    console.log(event.target.value);
     document.querySelector("#subMajYear").style.display = "none";
   }
   if (event.target.value === "sub") {
-    console.log(event.target.value);
     document.querySelector("#subMajYear").style.display = "";
   }
 }
