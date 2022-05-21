@@ -1,148 +1,176 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <title>SKKU Easy Portal</title>
+<head>
+  <meta charset="utf-8">
+  <title>SKKU Easy Portal</title>
 
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link href="css/sidebar.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-  </head>
-  <body>
 
-<main>
-  <div class="d-flex flex-column  text-white sidebarbg" style="width: 220px; height:100%; min-height:620px">
-    <div class ="d-flex justify-content-center mt-4" >
-      <img src="images/SKKU_logo.png" style="mix-blend-mode: soft-light;width: 150px;height: auto; cursor: pointer;"onclick="changeIframe('page/home.html')" alt="SKKU"  >
-    </div>
-    <ul class="nav nav-pills flex-column mt-5 mb-auto text-center">
-      <li>
-        <a href="#" id="Search" class="nav-link" style="height: 90px;" onclick="changeIframe('page/Search.html')">
-          <span style="line-height:70px;">궁금해</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" id="Study" class="nav-link " style="height: 90px;" onclick="changeIframe('page/Study.html')">
-          <span style="line-height:70px;">공부해</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" id="Save"class="nav-link" style="height: 90px" onclick="changeIframe('page/Save.html')">
-          <span style="line-height:70px;">암기해</span>
-        </a>
-      </li>
-    </ul>
-    <div class="dropdown">
-      <h1 id="Save"class="text-center mb-3 fs-2 fw-bold">
-        즐겨찾기
-      </h1>
-      <ul class="nav nav-pills flex-column mb-4 text-center">
-        <li>
-          <a href="https://www.skku.edu/" target="_blank" class="nav-site mb-0 fs-4">
-            SKKU
-          </a>
-        </li>
-        <li>
-          <a href="https://icampus.skku.edu/" target="_blank" class="nav-site mb-0 fs-4">
-            i-campus
-          </a>
-        </li>
-        <li>
-          <a href="https://cs.skku.edu/ko/" target="_blank" class="nav-site mb-0 fs-5" onclick="changeIframe('page/Save.html')">
-            학과 홈페이지
-          </a>
-        </li>
-        <li>
-          <a href="https://dorm.skku.edu/dorm/index.jsp" target="_blank" class="nav-site mb-0 fs-5" onclick="changeIframe('page/Save.html')">
-            기숙사
-          </a>
-        </li>
-      </ul>
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img id="profileimg" src="images/unknownuser.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong id="User">user</strong>
-      </a>
-      <ul id="dropdown" class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" id="Profiles"data-bs-toggle="modal" data-bs-target="#Profile" style="cursor: pointer; display: none;">Profile</a></li>
-        <li><hr class="dropdown-divider" id="divider"style="display:none;"></li>
-        <li><a class="dropdown-item" id="login" style="display:block;" onclick="changeIframe(`page/login.html`)">Login</a></li>
-        <li><a class="dropdown-item" id="logout" style="display:none;">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-  <iframe id="content" class="d-flex flex-fill" style="height:100%; min-height:620px;" src="page/home.html" ></iframe>
-</main>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link href="css/sidebar.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+</head>
+<body>
 
-<div class="modal fade" id="Profile" tabindex="-1" aria-labelledby="ProfileLabel" aria-hidden="true" style="pointer-events: none;" >
-  <div class="modal-dialog modal-dialog-centered" style="max-width:450px">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ProfileLabel">프로필</h5>
+  <main>
+    <div class="d-flex flex-column  text-white sidebarbg" style="width: 220px; height:100%; min-height:620px">
+      <div class="d-flex justify-content-center mt-4">
+        <img src="images/SKKU_logo.png" style="mix-blend-mode: soft-light;width: 150px;height: auto; cursor: pointer;"
+          onclick="changeIframe('page/home.html')" alt="SKKU">
       </div>
-      <div class="modal-body d-flex">
+      <ul class="nav nav-pills flex-column mt-5 mb-auto text-center">
+        <li>
+          <a href="#" id="Search" class="nav-link" style="height: 90px;" onclick="changeIframe('page/Search.html')">
+            <span style="line-height:70px;">궁금해</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="Study" class="nav-link " style="height: 90px;" onclick="changeIframe('page/Study.html')">
+            <span style="line-height:70px;">공부해</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="Save" class="nav-link" style="height: 90px" onclick="changeIframe('page/Save.html')">
+            <span style="line-height:70px;">암기해</span>
+          </a>
+        </li>
+      </ul>
+      <div class="dropdown">
+        <h1 id="Save" class="text-center mb-3 fs-2 fw-bold">
+          즐겨찾기
+        </h1>
+        <ul class="nav nav-pills flex-column mb-4 text-center">
+          <li style="height: 40px;">
+            <a href="https://www.skku.edu/" target="_blank" class="nav-site mb-0 fs-4">
+              SKKU
+            </a>
+          </li>
+          <li style="height: 40px;">
+            <a href="https://icampus.skku.edu/" target="_blank" class="nav-site mb-0 fs-4">
+              i-campus
+            </a>
+          </li>
+          <li style="height: 40px;">
+            <a href="https://cs.skku.edu/ko/" target="_blank" class="nav-site mb-0 fs-5"
+              onclick="changeIframe('page/Save.html')">
+              학과 홈페이지
+            </a>
+          </li>
+          <li style="height: 40px;">
+            <a href="https://dorm.skku.edu/dorm/index.jsp" target="_blank" class="nav-site mb-0 fs-5"
+              onclick="changeIframe('page/Save.html')">
+              기숙사
+            </a>
+          </li>
+        </ul>
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img id="profileimg" src="images/unknownuser.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong id="User">user</strong>
+        </a>
+        <ul id="dropdown" class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" id="Profiles" data-bs-toggle="modal" data-bs-target="#Profile"
+              style="cursor: pointer; display: none;">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider" id="divider" style="display:none;">
+          </li>
+          <li><a class="dropdown-item" id="login" style="display:block;"
+              onclick="changeIframe(`page/login.html`)">Login</a></li>
+          <li><a class="dropdown-item" id="logout" style="display:none;">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <iframe id="content" class="d-flex flex-fill" style="height:100%; min-height:620px;" src="page/home.html"></iframe>
+  </main>
+
+  <div class="modal fade" id="Profile" tabindex="-1" aria-labelledby="ProfileLabel" aria-hidden="true"
+    style="pointer-events: none;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:450px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ProfileLabel">프로필</h5>
+        </div>
+        <div class="modal-body d-flex">
           <div class="col" style="margin-right:0px">
-            <img id="settingimg" class="settingimg rounded-circle "src="images/unknown.jpg" alt="" width="150px" height="150px">
+            <img id="settingimg" class="settingimg rounded-circle " src="images/unknown.jpg" alt="" width="150px"
+              height="150px">
             <div id="filebox" class="ms-auto position-absolute">
-              <label for="FileUpload"class="rounded-circle position-relative"><i class="bi bi-download position-absolute top-50 start-50 translate-middle"></i></label>
-              <input type = "file" id = "FileUpload" accept=".jpg, .png">
+              <label for="FileUpload" class="rounded-circle position-relative"><i
+                  class="bi bi-download position-absolute top-50 start-50 translate-middle"></i></label>
+              <input type="file" id="FileUpload" accept=".jpg, .png">
             </div>
           </div>
           <div class="col" style="margin-top:60px; margin-left:0px">
-            이름: <input type="text" class="name" id="text" placeholder="user" onfocus="placeholder=''" onblur="placeholder='user'" onkeydown="check_length(this)" onkeyup="check_length(this)"></input>
+            이름: <input type="text" class="name" id="text" placeholder="user" onfocus="placeholder=''"
+              onblur="placeholder='user'" onkeydown="check_length(this)" onkeyup="check_length(this)"></input>
           </div>
         </div>
-      <div class="modal-footer" style="border:0px">
-        <button type="button" id="Cancel" class="btn" data-bs-dismiss="modal">취소</button>
-        <button type="button" id="Add" class="btn" data-bs-dismiss="modal">수정</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!------로딩화면 -------->
-<button type="button" id="LoadButton" style="display:none" data-bs-toggle="modal" data-bs-target="#Load"></button>
-    
-<div class="modal" id="Load" z-index="9000" style="pointer-events: none;">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="text-center">
-        <div class="loadingio-spinner"><div class="Loading">
-          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-          </div></div>
-        <p>데이터 처리중 입니다.<br>잠시만 기다려주세요.</p>
+        <div class="modal-footer" style="border:0px">
+          <button type="button" id="Cancel" class="btn" data-bs-dismiss="modal">취소</button>
+          <button type="button" id="Add" class="btn" data-bs-dismiss="modal">수정</button>
         </div>
-        <button type="button" id="CompleteButton" style="display:none" data-bs-dismiss="modal"></button>
       </div>
-
     </div>
   </div>
-</div>
-<!---------------------->
+
+  <!------로딩화면 -------->
+  <button type="button" id="LoadButton" style="display:none" data-bs-toggle="modal" data-bs-target="#Load"></button>
+
+  <div class="modal" id="Load" z-index="9000" style="pointer-events: none;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="loadingio-spinner">
+              <div class="Loading">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+            <p>데이터 처리중 입니다.<br>잠시만 기다려주세요.</p>
+          </div>
+          <button type="button" id="CompleteButton" style="display:none" data-bs-dismiss="modal"></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!---------------------->
 
 
 
-  <script src="http://code.jquery.com/jquery-latest.js"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
   <script>
     const firebaseConfig = {
-  apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
-  authDomain: "skkueasyportal.firebaseapp.com",
-  databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "skkueasyportal",
-  storageBucket: "skkueasyportal.appspot.com",
-  messagingSenderId: "1043329840201",
-  appId: "1:1043329840201:web:52eb93a09694215073bb98",
-  measurementId: "G-H5JYV5JV0Z",
-  };
-  firebase.initializeApp(firebaseConfig);
+      apiKey: "AIzaSyCPEEyVxPsmyJPBxYg3byC9_ztcdTupoDQ",
+      authDomain: "skkueasyportal.firebaseapp.com",
+      databaseURL: "https://skkueasyportal-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "skkueasyportal",
+      storageBucket: "skkueasyportal.appspot.com",
+      messagingSenderId: "1043329840201",
+      appId: "1:1043329840201:web:52eb93a09694215073bb98",
+      measurementId: "G-H5JYV5JV0Z",
+    };
+    firebase.initializeApp(firebaseConfig);
   </script>
   <script src="js/sidebars.js"></script>
-  </body>
+</body>
 </html>

@@ -85,6 +85,9 @@ function showPostContents() {
           // loadPosts(1);
           createPaging(1);
         });
+      } else {
+        let dBtn = document.querySelector("#deletePostBtn");
+        dBtn.style.display = "none";
       }
     });
   let postModal = new bootstrap.Modal(document.getElementById("showPostModal"));
@@ -198,43 +201,22 @@ let dataTips = new Array();
 dataTips.push(`<div class="row">
 <div>
   <br>
-  &nbsp;kingo ID가 있다면 교내에서 SKKU 와이파이 사용이 가능합니다.
-  <br><br>
-  <ol class="">
-    <li class="">
-      <p>
-         안드로이드<br>
-        <img
-          src="https://images.unsplash.com/photo-1607027340690-37e80b0f1b31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80"
-          class="figure-img img-fluid rounded" alt="..." style="width: 400px;">
-        <img
-          src="https://images.unsplash.com/photo-1607027340690-37e80b0f1b31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80"
-          class="figure-img img-fluid rounded" alt="..." style="width: 400px;">
-        <img
-          src="https://images.unsplash.com/photo-1607027340690-37e80b0f1b31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80"
-          class="figure-img img-fluid rounded" alt="..." style="width: 400px;">
-      </p>
-    </li>
-    <li class="">
-      <p>
-        ios<br>
-        <img
-          src="https://images.unsplash.com/photo-1607027340690-37e80b0f1b31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1973&q=80"
-          class="figure-img img-fluid rounded" alt="..." style="width: 400px;">
-      </p>
-    </li>
-  </ol>
+  &nbsp;kingo ID가 있다면 교내에서 SKKU 와이파이에 로그인 후 사용이 가능합니다.
+  <br>
+  <small>&nbsp;&nbsp;안드로이드 스마트폰의 경우 수동 설정이 필요합니다!</small>
+  <br>
+  <br>
 </div>
 <div>
   <h5>
     [ 참고 문서 ]
   </h5>
   <ul>
-    <li><a href="http://ibook.skku.edu/Viewer/wifi_android">안드로이드</a> <br></li>
-    <li><a href="http://ibook.skku.edu/Viewer/wifi_android11">안드로이드11</a> <br></li>
-    <li><a href="http://ibook.skku.edu/Viewer/wifi_windows10">win 10</a> <br></li>
-    <li><a href="http://ibook.skku.edu/Viewer/wifi_ios">ios</a> <br></li>
-    <li><a href="http://ibook.skku.edu/Viewer/wifi_mac">mac</a> <br></li>
+    <li><a href="http://ibook.skku.edu/Viewer/wifi_android" target="_blank">안드로이드</a> <br></li>
+    <li><a href="http://ibook.skku.edu/Viewer/wifi_android11" target="_blank">안드로이드11</a> <br></li>
+    <li><a href="http://ibook.skku.edu/Viewer/wifi_windows10" target="_blank">WINDOW</a> <br></li>
+    <li><a href="http://ibook.skku.edu/Viewer/wifi_ios" target="_blank">IOS</a> <br></li>
+    <li><a href="http://ibook.skku.edu/Viewer/wifi_mac" target="_blank">MAC</a> <br></li>
   </ul>
 </div>
 </div>
@@ -300,13 +282,13 @@ dataTips.push(`<div class="row">
     <div>학교에서 제공하는 여러 SW, 사이트들을 이용할 수 있습니다.
         <div>
             <br>
-            <button type="button" class="btn btn-info" id="tipBtn-1"
+            <button type="button" class="btn btn-info btn-lg  " id="tipBtn-1"
                 onclick="handleTipButton()">G-Suite</button>
-            <button type="button" class="btn btn-info" id="tipBtn-2" onclick="handleTipButton()">MS
+            <button type="button" class="btn btn-info btn-lg  " id="tipBtn-2" onclick="handleTipButton()">MS
                 Office</button>
-            <button type="button" class="btn btn-info" id="tipBtn-3"
+            <button type="button" class="btn btn-info btn-lg  " id="tipBtn-3"
                 onclick="handleTipButton()">Adobe</button>
-            <button type="button" class="btn btn-info" id="tipBtn-4" onclick="handleTipButton()">논문,
+            <button type="button" class="btn btn-info btn-lg  " id="tipBtn-4" onclick="handleTipButton()">논문,
                 전자저널</button>
         </div>
         <div id="tipContents"> 
@@ -349,10 +331,11 @@ dataTips.push(`<div class="row">
                     <h3>[ Adobe ]</h3>
                     수업, 연구, 행정용으로 adobe SW를 제공하고 있습니다. <br>
                     (22.5.14 기준) 계약 기간 : ~ 23/8/27 <br>
+                    <small>(총학생회에서 학기 초 모집하는 것과 무관합니다)</small><br><br>
                     - 해당 게시글 : <ul>
                         <li>(kingoID 로그인 상태에서 접속 가능) <a
                                 href="https://app.skku.edu/emate_app/bbs/b1805133145.nsf/view01_ko/6E2D67163C6C5154492585D20046269B?OpenDocument&rowid=6E2D67163C6C5154492585D20046269B_2996&ui=webmail"
-                                target="_blank" class="btn btn-secondary">LINK</a></li>
+                                target="_blank" class="btn btn-outline-secondary">LINK</a></li>
                         <li>SKKU -> kingoID로그인 -> 게시판 -> "Adobe 소프트웨어 라이선스 갱신 및 이용 안내" (8566번 게시글) 확인</li>
                         </ul>
                         &nbsp;<i class="bi bi-exclamation-octagon"></i>
@@ -365,7 +348,7 @@ dataTips.push(`<div class="row">
                 성균관대학교 학술 정보관에서는 여러 전자자료(DBpia, RISS 등)를 제공하고 있습니다. <br>
                 재학 및 재직 중인 구성원에 한해서 이용할 수 있고 학술정보관 홈페이지를 통하여 접속이 가능합니다.<br>
                 <a href="https://lib.skku.edu/suwon/#/er/database#firstChartset" target="_blank"
-                    class="btn btn-secondary">LINK</a><br><br>
+                    class="btn btn-outline-secondary">LINK</a><br><br>
             </div>
         </div>
     </div>
