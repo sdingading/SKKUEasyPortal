@@ -4,7 +4,7 @@ const storage = firebase.storage();
 const db = firebase.database();
 let postN = 0;
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
   document.getElementById("LoadButton").click();
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -15,7 +15,7 @@ window.addEventListener("load",()=>{
       // ...
     }
   });
-})
+});
 
 // Post
 function saveNewPost() {
@@ -246,7 +246,7 @@ dataTips.push(`<div class="row">
     <label class="mr-sm-2" for="subMajorEnterYear"> 복전 진입 시점 </label>
     <select class="form-select form-select-lg mb-3" id="subMajorEnterYear" style="width:auto;>
       <option value="y2022_1" selected> 2022_1 </option>
-      <option value="y2022_2" selected> 2022_2 </option>
+      <option value="y2022_2"> 2022_2 </option>
       <option value="y2021_1"> 2021_1 </option>
       <option value="y2021_2"> 2021_2 </option>
       <option value="y2020_1"> 2020_1 </option>
