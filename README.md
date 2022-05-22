@@ -44,7 +44,7 @@
 
 이곳에 쓰인 글은 사용자 모두가 열람할 수 있으며, 본인이 쓴 게시글에는 체크 표시가 글쓴이 옆에 표시됩니다.
 
-<img width="100%" src="https://user-images.githubusercontent.com/100272259/169675012-d91b6cfd-f20c-48da-bca8-6ae015d89921.png">
+<img width="100%" src="https://user-images.githubusercontent.com/70026347/169687596-5905861b-ae67-4cd5-b02f-59cba37be1b2.png">
 본인이 쓴 게시글은 열람할 경우, 삭제버튼이 나타나며 본인이 쓴 게시글만 삭제가 가능합니다.
 
 ### 2. 정보 페이지
