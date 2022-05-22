@@ -2,9 +2,11 @@
 
 성균관대 학생을 위한 Easy - 포털 (Web Page)
 
-학생들의 일정관리, 강의 수강, 학교 공지 확인(학교(과) 공지사항, gls, I-campus 등) 등 대학생활에 필요한 내용들이 너무 분산되어 있다는 생각이 들었다. 
+학생들의 일정관리, 강의 수강, 학교 공지 확인(학교(과) 공지사항, gls, I-campus 등) 등
+대학생활에 필요한 내용들이 너무 분산되어 있다는 생각이 들었습니다.
 
-이 내용들에 대한 접근성을 높이기 위해, 학교 생활에 필요한 내용을 쉽게 관리할 수 있으면서, 학생들의 공부를 도와줄 수 있는 웹페이지를 만들어 보기로 하였다.
+이 내용들에 대한 접근성을 높이기 위해 학교 생활에 필요한 내용을 쉽게 관리할 수 있으면서,
+학생들의 학업에도 도움을 줄 수 있는 웹페이지를 만들어 보기로 하였습니다.
 
 **< 🛠 제공 기능 >**
 
@@ -22,9 +24,7 @@
 
 <img width="100%" src="https://user-images.githubusercontent.com/80513243/169660175-046749e1-2aac-4f74-970d-5bbbe6e4a008.png">
 
-
 # 기능 엿보기
-
 
 ## - 📓회원가입
 
@@ -59,7 +59,7 @@
 
 <img width="100%" src="https://user-images.githubusercontent.com/80513243/169685635-7fcb6e94-61be-4324-a9f5-78edb281699e.png" >
 
-### 1. 타이머 
+### 1. 타이머
 
 <img width="100%" src="https://user-images.githubusercontent.com/80513243/169685726-862dda3d-2a0e-41fb-9f4b-5ea1a44f1dbe.png">
 
@@ -113,12 +113,10 @@
 
 🙋‍♀️주의! 페이지에 추가할 수 있는 파일은 .pdf .jpg .png .txt 확장자의 파일만 지원합니다.
 
-
 # How To Contribute
 
 이 [레포지토리](https://github.com/dkscksals12/SKKUEasyPortal)를 fork 해 주세요.
 수정한 내용을 pull request 로 보내주세요.
-
 
 # 저작권 라이선스
 
