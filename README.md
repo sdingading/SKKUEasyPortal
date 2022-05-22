@@ -23,7 +23,6 @@
 링크 : https://dkscksals12.github.io/SKKUEasyPortal/
 
 <img width="100%" src="https://user-images.githubusercontent.com/80513243/169660175-046749e1-2aac-4f74-970d-5bbbe6e4a008.png">
-
 # 기능 엿보기
 
 ## - 📓회원가입
@@ -36,7 +35,7 @@
 
 ## - 📗궁금해
 
-<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660240-feb66d6c-24ab-4e83-a6af-abe9e34679a6.png">
+<img width="100%" src="https://user-images.githubusercontent.com/70026347/169686870-84fb7258-33ce-49bf-a1d7-219498642041.png">
 
 ### 1. 자유 게시판
 
