@@ -35,11 +35,11 @@
 
 ## - 📗궁금해
 
-<img width="100%" src="https://user-images.githubusercontent.com/70026347/169686870-84fb7258-33ce-49bf-a1d7-219498642041.png">
+<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660240-feb66d6c-24ab-4e83-a6af-abe9e34679a6.png">
 
 ### 1. 자유 게시판
 
-<img width="100%" src="https://user-images.githubusercontent.com/80513243/169660262-a1d46a51-0e87-457d-b87c-55fee93b75d3.png">
+<img width="100%" src="https://user-images.githubusercontent.com/70026347/169686870-84fb7258-33ce-49bf-a1d7-219498642041.png">
 글쓰기 버튼을 클릭하면 새 글을 작성할 수 있습니다.
 
 이곳에 쓰인 글은 사용자 모두가 열람할 수 있으며, 본인이 쓴 게시글에는 체크 표시가 글쓴이 옆에 표시됩니다.
