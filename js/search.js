@@ -30,6 +30,12 @@ function saveNewPost() {
       let pTitle = document.querySelector("#postTitle").value;
       let pAuthor = document.querySelector("#postAuthor").value;
       let pContent = document.querySelector("#postContent").value;
+      if (!pTitle.length || pTitle.replace(/^\s+|\s+$/g, "") == "")
+        pTitle = "제목없음";
+      if (!pAuthor.length || pAuthor.replace(/^\s+|\s+$/g, "") == "")
+        pAuthor = "익명";
+      if (!pContent.length || pTitle.replace(/^\s+|\s+$/g, "") == "")
+        pContent = "내용없음";
       let p = {
         id: len + 1,
         title: pTitle,
@@ -52,8 +58,9 @@ function saveNewPost() {
 }
 
 function deletePost(_id, delTar) {
+  console.log(delTar);
   if (_id === uid) {
-    let checkDel = confirm("해상 게시글을 삭제하시겠습니까?");
+    let checkDel = window.confirm("해상 게시글을 삭제하시겠습니까?");
     if (checkDel) {
       db.ref(`post/${delTar}`).remove();
     }
@@ -78,12 +85,16 @@ function showPostContents() {
       if (subs.val()[tar].userID === uid) {
         let dBtn = document.querySelector("#deletePostBtn");
         dBtn.style.display = "block";
-        dBtn.addEventListener("click", () => {
-          deletePost(subs.val()[tar].userID, tar);
-          postModal.hide();
-          // loadPosts(1);
-          createPaging(1);
-        });
+        dBtn.addEventListener(
+          "click",
+          function () {
+            deletePost(subs.val()[tar].userID, tar);
+            postModal.hide();
+            // loadPosts(1);
+            createPaging(1);
+          },
+          { once: true }
+        );
       } else {
         let dBtn = document.querySelector("#deletePostBtn");
         dBtn.style.display = "none";
