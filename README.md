@@ -108,7 +108,7 @@ D-day 날짜가 끝날 경우 --로 표현됩니다.
 
 처음 가입했을 땐, + 모양 버튼을 눌러 새로운 책을 추가할 수 있습니다.
 
-<img width="100%" src="https://user-images.githubusercontent.com/70026347/169688845-7e6cac63-4e32-47ac-b25a-ed4be184b25a.png">
+<img width="100%" src="https://user-images.githubusercontent.com/70026347/169688925-3e4076fd-43e2-4a03-ae51-7e2ae5c38907.png">
 
 책의 제목, 색, 글자색을 마음대로 설정하실 수 있습니다.
 
